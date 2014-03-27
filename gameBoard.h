@@ -21,6 +21,7 @@ class gameBoard {
 		gameBoard();
 		~gameBoard();
 		void setSeed(int pSeed);
+		void setLevel(int pLevel);
 		//Block getCurrentBlock();
 		//Block getNextBlock();
 		void setGraphics();

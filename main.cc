@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cstring>
+#include <sstream>
 #include "gameBoard.h"
 
 using namespace std;
@@ -7,9 +9,39 @@ using namespace std;
 int main(int argc, char * argv[]) {
 
         string s;
-	gameBoard * board;
+	gameBoard * board = new gameBoard();
+
+	//do the args stuff
+	for(int i = 0; i < argc; i++) {
+		if(strcmp(argv[i],"-text") == 0) {
+			//currently we default text, for now
+			//if we get graphics going, change setGraphics to set it to false, and uncomment this
+			//board->setGraphics();
+		}
+		else if(strcmp(argv[i],"-seed") == 0) {
+			int s;
+			istringstream iss(argv[i+1]);
+			iss >> s;
+			board->setSeed(s);
+			i++;
+		}
+		else if(strcmp(argv[i],"-scriptfile") == 0) {
+			//get the next argument (filename) and put in level
+			i++;
+		}
+		else if(strcmp(argv[i],"-startlevel") == 0) {
+			int s;
+			istringstream iss(argv[i+1]);
+			iss >> s;
+			board->setLevel(s);
+			i++;
+		}
+	}
+
+	//generate the current block and next block on the board
+	//blah blah blah
+
         while(cin >> s) {
-	
 		if(s.length() < 2) {
 			cerr << "invalid command" << endl;
 		} else {
@@ -26,12 +58,10 @@ int main(int argc, char * argv[]) {
 
 			//command autocomplete
 			string commands[] = {"clockwise","counterclockwise","down","drop","left","levelup","leveldown","restart","right"};
-			cout << "command: " << s << endl;
 			string command;
 			int cmdPossible = 0;
 			for(int i = 0; i < 9; ++i) {
-				int found = commands[0].find(s);
-				cout << "found: " << found << endl;
+				int found = commands[i].find(s);
 				if(found == 0) {
 					cmdPossible++;
 					command = commands[i];
@@ -40,6 +70,7 @@ int main(int argc, char * argv[]) {
 			if(cmdPossible == 0) { cerr << "no commands found" << endl; }
 			else if(cmdPossible > 1) { cerr << "too many possibilities" << endl; }
 			else {
+				cout << "your command: " << mult << "x " << command << endl;
 				if(!s.compare("restart")) { (*board).restart(); }
 				else if(!s.compare("levelup")) { for(int i = 0; i < mult; ++i) (*board).levelUp(); }
 				else if(!s.compare("leveldown")) { for(int i = 0; i < mult; ++i) (*board).levelDown(); }

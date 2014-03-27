@@ -6,6 +6,8 @@
 #define NUM_ROWS 18
 #define NUM_COLS 10
 
+using namespace std;
+
 gameBoard::gameBoard() {
 
 	level = 0;
@@ -22,7 +24,7 @@ gameBoard::gameBoard() {
 	for(int i = 0; i < NUM_ROWS; ++i) {
 		board[i] = new Cell * [NUM_COLS];
 		for(int j = 0; j < NUM_COLS; j++) {
-			board[i][j] = new Cell();
+			board[i][j] = new Cell(i,j);
 		}
 	}
 
@@ -65,7 +67,7 @@ void gameBoard::restart() {
 	for(int i = 0; i < NUM_ROWS; ++i) {
 		board[i] = new Cell * [NUM_COLS];
 		for(int j = 0; j < NUM_COLS; j++) {
-			board[i][j] = new Cell();
+			board[i][j] = new Cell(i,j);
 		}
 	}
 
@@ -86,6 +88,9 @@ bool gameBoard::getGraphics() {
 	return isGraphics;
 }
 
+void gameBoard::setLevel(int pLevel) {
+	level = pLevel;
+}
 void gameBoard::calculateScore() {
 
 }
@@ -96,14 +101,16 @@ void gameBoard::remove() {
 
 
 bool gameBoard::isLegal(int pPostion[]) {
-
+return true;		
 }
 
 void gameBoard::levelUp() {
 }
 
 void gameBoard::levelDown() {
+
 }
+
 void gameBoard::left() {
 }
 
@@ -121,7 +128,27 @@ void gameBoard::rotateCW() {
 }
 
 void gameBoard::rotateCCW() {
-}
-/*friend ostream &operator<<(ostream &out, const gameBoard &b) {
 
-} */
+}
+
+ostream &operator<<(ostream &out, const gameBoard &b) {
+	//display header
+	out << "Level:    " << b.level << endl;
+	out << "Score:    " << b.currentScore << endl;
+	out << "Hi Score: " << b.hiScore << endl;
+	out << "----------" << endl;
+
+	//display game
+	for(int i = 0; i < NUM_ROWS; ++i) {
+		for(int j = 0; j < NUM_COLS; ++j) {
+			out << *(b.board[i][j]);
+		}
+		out << endl;
+	}
+	out << "----------" << endl;
+	
+	//display next block
+	out << "Next:" << endl;
+	out << *(b.nextBlock);	
+	return out;
+}

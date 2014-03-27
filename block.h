@@ -5,14 +5,17 @@
 
 class Block {
 
-  Cell cells[4][4];
+  Cell **cells;
 
  public:
   Block();
   ~Block();
+  void left();
+  void right();
+  void down();
   virtual void rotateCCW()= 0;
   virtual void rotateCW()= 0;
-	
+  friend std::ostream &operator<<(std::ostream &out, const Block &bl);	
 
 };
 #endif
