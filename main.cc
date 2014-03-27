@@ -81,6 +81,8 @@ int main(int argc, char * argv[]) {
 				else if(!s.compare("clockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCW(); }
 				else if(!s.compare("counterclockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCCW(); }
 			}
+			cout << *board;
+			//after the move, probably should check if they lose yet
 		}
 	}
 }
