@@ -13,6 +13,8 @@ Block::Block() {
 			cells[i][j].y = j;
 		}
 	}
+        current_level = 0;
+        current_block_id = 0;
 }
 Block::~Block(){}
 
