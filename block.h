@@ -20,10 +20,10 @@ class Block {
   virtual void rotateCCW()= 0;
   virtual void rotateCW()= 0;
   friend std::ostream &operator<<(std::ostream &out, const Block &bl);
-
  protected:
   int current_level;
   int current_block_id;	
+
 
 };
 #endif

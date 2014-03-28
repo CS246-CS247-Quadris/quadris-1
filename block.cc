@@ -18,6 +18,10 @@ Block::Block() {
 }
 Block::~Block(){}
 
+void Block::setLevel(int level){
+	current_level = level;
+}
+
 ostream &operator<<(ostream &out, const Block &bl) {
 	for(int i = 0; i < SIZE; ++i) {
 		string tmp;
