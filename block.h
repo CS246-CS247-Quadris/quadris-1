@@ -4,17 +4,20 @@
 #include "cell.h"
 #include <vector>
 
+class gameBoard;
+
 class Block {
 
+ gameBoard * board;
  public:
   Block();
   ~Block();
-  void left();
-  void right();
-  void down();
+  virtual void left() = 0;
+  virtual void right() = 0;
+  virtual void down() = 0;
   void setLevel(int);
-  virtual void rotateCCW()= 0;
-  virtual void rotateCW()= 0;
+  virtual void rotateCCW() = 0;
+  virtual void rotateCW() = 0;
   friend std::ostream &operator<<(std::ostream &out, const Block &bl);
  protected:
   std::vector<Cell> cells;

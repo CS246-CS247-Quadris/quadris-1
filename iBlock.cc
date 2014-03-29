@@ -1,10 +1,11 @@
 #include "iBlock.h"
 #include <iostream>
 #include <string>
+#include "gameBoard.h"
 #define SIZE 4
 using namespace std;
 
-iBlock::iBlock():Block() {
+iBlock::iBlock(gameBoard * pBoard):Block(pBoard) {
 	cells.push_back(Cell(0,0,'i',current_level,true));
 	cells.push_back(Cell(1,0,'i',current_level,true));
 	cells.push_back(Cell(2,0,'i',current_level,true));

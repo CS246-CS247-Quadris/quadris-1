@@ -30,8 +30,8 @@ class gameBoard {
 		void setGraphics();
 		bool getGraphics();
 		void calculateScore();
-		void remove();
-		bool isLegal(int pPosition[2]);
+		void remove(int row);
+		//bool isLegal(int pPosition[2]);
 		void restart();
 		void levelUp();
 		void levelDown();

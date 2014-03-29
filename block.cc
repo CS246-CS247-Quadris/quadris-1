@@ -3,10 +3,12 @@
 #include <sstream>
 #include <vector>
 #include "block.h"
+#include "gameBoard.h"
 
 using namespace std;
 
-Block::Block() {
+Block::Block(gameBoard * pBoard) {
+		board = pBoard;
         current_level = 0;
         current_block_id = 0;
 }
@@ -14,6 +16,10 @@ Block::~Block(){}
 
 void Block::setLevel(int level){
 	current_level = level;
+}
+
+void Block::left() {
+
 }
 
 ostream &operator<<(ostream &out, const Block &bl) {

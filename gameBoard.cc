@@ -34,8 +34,8 @@ gameBoard::gameBoard() {
 	//availableBlocks[] = {};
 
 	//define blocks
-	currentBlock = NULL;
-	nextBlock = NULL;
+	currentBlock = generateBlock();
+	nextBlock = generateBlock();
 }
 
 gameBoard::~gameBoard(){
@@ -148,23 +148,24 @@ void gameBoard::calculateScore() {
 
 }
 
-void gameBoard::remove() {
+void gameBoard::remove(int row) {
 
 }
 
-
-bool gameBoard::isLegal(int pPostion[]) {
-	return true;		
-}
+// bool gameBoard::isLegal(int pPostion[]) {	
+// 	return true;		
+// }
 
 void gameBoard::levelUp() {
+	level == 3 ? level = 3 : level++;
 }
 
 void gameBoard::levelDown() {
-
+	level == 0 ? level = 0 : level--;
 }
 
 void gameBoard::left() {
+	Block * newBlock = new Block(*currentBlock);
 }
 
 void gameBoard::right() {

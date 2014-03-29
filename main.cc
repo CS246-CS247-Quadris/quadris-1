@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, char * argv[]) {
 
-        string s;
+    string s;
 	gameBoard * board = new gameBoard();
 
 	//do the args stuff
@@ -41,7 +41,7 @@ int main(int argc, char * argv[]) {
 		}
 	}
 
-	Block * blk = new iBlock();
+	Block * blk = new iBlock(board);
 	cout << *blk;
 	blk->rotateCW();
 	cout << *blk;
