@@ -4,15 +4,14 @@
 
 class jBlock : public Block {
 
-  Cell **cells;
-
  public:
-  iBlock();
-  ~iBlock();
+  jBlock(gameBoard * pBoard);
+  ~jBlock();
   virtual void rotateCCW();
   virtual void rotateCW();
-
- friend std::ostream &operator<<(std::ostream &out, const iBlock &bl);
+  virtual void left();
+  virtual void right();
+  virtual void down();
 	
 };
 #endif

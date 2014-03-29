@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -Wall -MMD -g -L/usr/X11R6/lib
 EXEC = quadris
-OBJECTS = main.o cell.o block.o gameBoard.o iBlock.o
+OBJECTS = main.o cell.o block.o gameBoard.o iBlock.o oBlock.o jBlock.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

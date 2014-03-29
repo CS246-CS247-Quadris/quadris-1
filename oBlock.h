@@ -1,18 +1,17 @@
-#ifndef __IBLOCK_O__
-#define __IBLOCK_O__
+#ifndef __OBLOCK_H__
+#define __OBLOCK_H__
 #include "block.h"
 
 class oBlock : public Block {
 
-  Cell **cells;
-
  public:
-  oBlock();
+  oBlock(gameBoard * pBoard);
   ~oBlock();
   virtual void rotateCCW();
   virtual void rotateCW();
-
- friend std::ostream &operator<<(std::ostream &out, const iBlock &bl);
+  virtual void left();
+  virtual void right();
+  virtual void down();
 	
 };
 #endif

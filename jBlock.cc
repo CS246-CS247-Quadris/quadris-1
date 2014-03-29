@@ -1,82 +1,51 @@
 #include "jBlock.h"
-#include <iostream>
-#include <string>
-#define SIZE 4
-using namespace std;
 
-iBlock::iBlock():Block() {
-	cells = new Cell * [SIZE];
-	for(int i = 0; i < SIZE; ++i) {
-		cells[i] = new Cell[SIZE];
-		for(int j = 0; j < SIZE; ++j) {
-			cells[i][j].x = i;
-			cells[i][j].y = j;
-			cells[i][j].levelCreated = current_level;
-			cells[i][j].block_id = current_block_id;
-			cells[i][j].block_type = 'i';
-		}
-	}
-	cells[0][0].filled = true;
-	cells[1][0].filled = true;
-	cells[2][0].filled = true;
-	cells[3][0].filled = true;
+jBlock::jBlock(gameBoard * pBoard):Block(pBoard) {
+	cells.push_back(new Cell(3,0,'j',current_level,true));
+	cells.push_back(new Cell(3,1,'j',current_level,true));
+	cells.push_back(new Cell(3,2,'j',current_level,true));
+	cells.push_back(new Cell(2,0,'j',current_level,true));
 	current_block_id++;
 }
-iBlock::~iBlock(){}
+jBlock::~jBlock() {}
 
-
-/*
-++++
-J+++
-J+++
-JJ++
-
-++++
-++++
-++J+
-JJJ+
-
-++++
-++++
-J+++
-JJJ+
-
-++++
-JJ++
-J+++
-J+++
-*/
-void iBlock::rotateCCW(){
-
-
-
+void jBlock::rotateCCW() {
+	rotateCW();
 }
-void iBlock::rotateCW(){
 
-  if(cells[0][0].filled){
-	cells[0][0].filled = false;
-	cells[1][0].filled = false;
-	cells[2][0].filled = false;
-	cells[3][1].filled = true;
-	cells[3][2].filled = true;
-	cells[3][3].filled = true;
-
-
-
-  }else{
-
-	cells[0][0].filled = true;
-	cells[1][0].filled = true;
-	cells[2][0].filled = true;
-	cells[3][1].filled = false;
-	cells[3][2].filled = false;
-	cells[3][3].filled = false;
-
-
+void jBlock::rotateCW() {
+  if(cells.at(0)->x != cells.at(3)->x) {
+	cells.at(1)->setXY(cells.at(0)->x,cells.at(0)->y-1);
+	cells.at(2)->setXY(cells.at(0)->x,cells.at(0)->y-2);
+	cells.at(3)->setXY(cells.at(0)->x,cells.at(0)->y-3);
+  } else {
+	cells.at(1)->setXY(cells.at(0)->x-1,cells.at(0)->y);
+	cells.at(2)->setXY(cells.at(0)->x-2,cells.at(0)->y);
+	cells.at(3)->setXY(cells.at(0)->x-3,cells.at(0)->y);
   }
 }
 
+void jBlock::left(){
+
+	cells.at(0)->setXY(cells.at(0)->x,cells.at(0)->y-1);
+	cells.at(1)->setXY(cells.at(1)->x,cells.at(1)->y-1);
+	cells.at(2)->setXY(cells.at(2)->x,cells.at(2)->y-1);
+	cells.at(2)->setXY(cells.at(3)->x,cells.at(3)->y-1);
 
 
+}
+void jBlock::right(){
 
-ostream &operator<<(ostream &out, const iBlock &bl){};
+	cells.at(0)->setXY(cells.at(0)->x,cells.at(0)->y+1);
+	cells.at(1)->setXY(cells.at(1)->x,cells.at(1)->y+1);
+	cells.at(2)->setXY(cells.at(2)->x,cells.at(2)->y+1);
+	cells.at(2)->setXY(cells.at(3)->x,cells.at(3)->y+1);
+
+}
+void jBlock::down(){
+	cells.at(0)->setXY(cells.at(0)->x-1,cells.at(0)->y);
+	cells.at(1)->setXY(cells.at(1)->x-1,cells.at(1)->y);
+	cells.at(2)->setXY(cells.at(2)->x-1,cells.at(2)->y);
+	cells.at(2)->setXY(cells.at(3)->x-1,cells.at(3)->y);
+
+}
