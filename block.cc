@@ -1,19 +1,12 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <vector>
 #include "block.h"
-#define SIZE 4
+
 using namespace std;
 
 Block::Block() {
-	cells = new Cell * [SIZE];
-	for(int i = 0; i < SIZE; ++i) {
-		cells[i] = new Cell[SIZE];
-		for(int j = 0; j < SIZE; ++j) {
-			cells[i][j].x = i;
-			cells[i][j].y = j;
-		}
-	}
         current_level = 0;
         current_block_id = 0;
 }
@@ -24,15 +17,19 @@ void Block::setLevel(int level){
 }
 
 ostream &operator<<(ostream &out, const Block &bl) {
+	int c = 0;
 	stringstream ss;
-	for(int i = 0; i < SIZE; ++i) {
-		for(int j = 0; j < SIZE; ++j) {
-			ss << bl.cells[i][j].block_type;
+	for(int i = 0; i < 4 && c < 4; ++i) {
+		for(int j = 0; j < 4 && c < 4; ++j) {
+			if(bl.cells.at(c).x == i && bl.cells.at(c).y == j) {
+				ss << bl.cells.at(c);
+				c++;
+			} else {
+				ss << ' ';
+			}
 		}
-		
-		string tmp = ss.str();
-		if(!tmp.empty()) {
-			out << tmp << endl;
+		if(ss.str().find_first_not_of(' ') != std::string::npos) {
+			out << ss.str() << endl;
 		}
 		ss.str("");
 	}

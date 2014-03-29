@@ -5,11 +5,10 @@
 using namespace std;
 
 iBlock::iBlock():Block() {
-	cells[0][0].filled = true;
-	cells[0][0].block_type = 'i';
-	cells[1][0].filled = true;
-	cells[2][0].filled = true;
-	cells[3][0].filled = true;
+	cells.push_back(Cell(0,0,'i',current_level,true));
+	cells.push_back(Cell(1,0,'i',current_level,true));
+	cells.push_back(Cell(2,0,'i',current_level,true));
+	cells.push_back(Cell(3,0,'i',current_level,true));
 	current_block_id++;
 }
 iBlock::~iBlock() {}
@@ -19,19 +18,15 @@ void iBlock::rotateCCW() {
 }
 
 void iBlock::rotateCW() {
-  if(cells[0][0].filled) {
-	cells[0][0].filled = false;
-	cells[1][0].filled = false;
-	cells[2][0].filled = false;
-	cells[3][1].filled = true;
-	cells[3][2].filled = true;
-	cells[3][3].filled = true;
+  if(cells.at(0).filled) {
+	cells.at(0).setXY(3,0);
+	cells.at(1).setXY(3,1);
+	cells.at(2).setXY(3,2);
+	cells.at(3).setXY(3,3);
   } else {
-	cells[0][0].filled = true;
-	cells[1][0].filled = true;
-	cells[2][0].filled = true;
-	cells[3][1].filled = false;
-	cells[3][2].filled = false;
-	cells[3][3].filled = false;
+  	cells.at(0).setXY(0,0);
+	cells.at(1).setXY(1,0);
+	cells.at(2).setXY(2,0);
+	cells.at(3).setXY(3,0);
   }
 }

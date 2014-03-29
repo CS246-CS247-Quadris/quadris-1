@@ -1,11 +1,21 @@
 #include "cell.h"
 
 Cell::Cell() {}
+
 Cell::Cell(int pX, int pY) : x(pX), y(pY) {
 	block_id = -1;
 	block_type = ' ';
 	levelCreated = -1;
 	filled = false;
+}
+
+Cell::Cell(int pX, int pY, char pBlock_Type, int pLevelCreated, bool pFilled) : x(pX), y(pY), block_type(pBlock_Type), levelCreated(pLevelCreated), filled(pFilled) {
+	block_id = -1;
+}
+
+void Cell::setXY(int pX, int pY) {
+	x = pX;
+	y = pY;
 }
 Cell::~Cell(){}
 

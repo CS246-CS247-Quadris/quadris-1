@@ -6,7 +6,6 @@
 
 class Block {
 
-  int current_level;
  public:
   Block();
   ~Block();
@@ -19,10 +18,10 @@ class Block {
   virtual void rotateCW()= 0;
   friend std::ostream &operator<<(std::ostream &out, const Block &bl);
  protected:
-  Cell **cells;
+  std::vector<Cell> cells;
   int current_block_id;
   char block_type;
-
+  int current_level;
 
 };
 #endif
