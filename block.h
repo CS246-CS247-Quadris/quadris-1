@@ -10,7 +10,7 @@ class Block {
 
  gameBoard * board;
  public:
-  Block();
+  Block(gameBoard * pBoard);
   ~Block();
   void setLevel(int);
   virtual void rotateCCW()= 0;

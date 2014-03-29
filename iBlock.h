@@ -5,7 +5,7 @@
 class iBlock : public Block {
 
  public:
-  iBlock();
+  iBlock(gameBoard * pBoard);
   ~iBlock();
   virtual void rotateCCW();
   virtual void rotateCW();

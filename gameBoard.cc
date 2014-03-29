@@ -165,7 +165,7 @@ void gameBoard::levelDown() {
 }
 
 void gameBoard::left() {
-	Block * newBlock = new Block(*currentBlock);
+	
 }
 
 void gameBoard::right() {
