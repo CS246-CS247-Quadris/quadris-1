@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include "cell.h"
 #include "block.h"
 #include "gameBoard.h"
@@ -77,12 +78,12 @@ void gameBoard::restart() {
 	nextBlock = NULL;
 }
 
-Block gameBoard::generateBlock() {
+Block * gameBoard::generateBlock() {
 	switch(level) {
 		case 0:
 			//read the next one from file...do we need a counter in the meantime
 			break;
-		case 1:
+		case 1: {
 			int i = rand() % 12;
 			switch(i) {
 				case 0:
@@ -97,11 +98,13 @@ Block gameBoard::generateBlock() {
 					break;
 			}
 			break;
-		case 2:
+		}
+		case 2: {
 			int i = rand() % 7;
 			return(availableBlocks[i]);
 			break;
-		case 3:
+		}
+		case 3: {
 			int i = rand() % 9;
 			switch(i) {
 				case 0: case 1:
@@ -116,7 +119,9 @@ Block gameBoard::generateBlock() {
 					break;
 			}
 			break;
+		}
 	}
+	return NULL;
 }
 
 void gameBoard::setSeed(int pSeed) {
