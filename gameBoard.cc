@@ -194,6 +194,7 @@ void gameBoard::preMove() {
 void gameBoard::postMove() {
 	vector<Cell *> cells = currentBlock->getCells();
 	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
+		cout << "X/Y: " << (*it)->x << " " << (*it)->y << endl;
 		board[(*it)->x][(*it)->y] = *it;
 	}
 }
