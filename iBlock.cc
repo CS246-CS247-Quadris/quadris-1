@@ -24,9 +24,9 @@ void iBlock::rotateCW() {
 	cells.at(1).setXY(cells.at(3).x,cells.at(3).y+2);
 	cells.at(2).setXY(cells.at(3).x,cells.at(3).y+1);
   } else {
-	cells.at(0).setXY(cells.at(3).x-3,cells.at(3).y-3);
-	cells.at(1).setXY(cells.at(3).x-2,cells.at(3).y-2);
-	cells.at(2).setXY(cells.at(3).x-1,cells.at(3).y-1);
+	cells.at(0).setXY(cells.at(3).x-3,cells.at(3).y);
+	cells.at(1).setXY(cells.at(3).x-2,cells.at(3).y);
+	cells.at(2).setXY(cells.at(3).x-1,cells.at(3).y);
 
   }
 }
