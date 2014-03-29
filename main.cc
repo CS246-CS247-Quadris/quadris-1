@@ -3,6 +3,7 @@
 #include <cstring>
 #include <sstream>
 #include "gameBoard.h"
+#include "iBlock.h"
 
 using namespace std;
 
@@ -38,6 +39,8 @@ int main(int argc, char * argv[]) {
 		}
 	}
 
+	Block * blk = new iBlock();
+	cout << *blk << endl; 
 	//generate the current block and next block on the board
 	//blah blah blah
 

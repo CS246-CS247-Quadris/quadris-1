@@ -3,6 +3,7 @@
 #include "cell.h"
 #include "block.h"
 #include "gameBoard.h"
+#include "iBlock.h"
 #define NUM_ROWS 18
 #define NUM_COLS 10
 

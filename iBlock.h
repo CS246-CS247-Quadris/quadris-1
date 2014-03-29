@@ -4,15 +4,11 @@
 
 class iBlock : public Block {
 
-  Cell **cells;
-
  public:
   iBlock();
   ~iBlock();
   virtual void rotateCCW();
   virtual void rotateCW();
-
- friend std::ostream &operator<<(std::ostream &out, const iBlock &bl);
 	
 };
 #endif
