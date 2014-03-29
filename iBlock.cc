@@ -18,15 +18,14 @@ void iBlock::rotateCCW() {
 }
 
 void iBlock::rotateCW() {
-  if(cells.at(0).filled) {
-	cells.at(0).setXY(3,0);
-	cells.at(1).setXY(3,1);
-	cells.at(2).setXY(3,2);
-	cells.at(3).setXY(3,3);
+  if(cells.at(0).x != cells.at(3).x) {
+	cells.at(0).setXY(cells.at(3).x,cells.at(3).y+3);
+	cells.at(1).setXY(cells.at(3).x,cells.at(3).y+2);
+	cells.at(2).setXY(cells.at(3).x,cells.at(3).y+1);
   } else {
-  	cells.at(0).setXY(0,0);
-	cells.at(1).setXY(1,0);
-	cells.at(2).setXY(2,0);
-	cells.at(3).setXY(3,0);
+	cells.at(0).setXY(cells.at(3).x-3,cells.at(3).y-3);
+	cells.at(1).setXY(cells.at(3).x-2,cells.at(3).y-2);
+	cells.at(2).setXY(cells.at(3).x-1,cells.at(3).y-1);
+
   }
 }
