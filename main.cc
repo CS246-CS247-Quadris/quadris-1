@@ -27,7 +27,8 @@ int main(int argc, char * argv[]) {
 			i++;
 		}
 		else if(strcmp(argv[i],"-scriptfile") == 0) {
-			//get the next argument (filename) and put in level
+			ifstream file(argv[i+1]);
+			board->setLevelZeroFile(file);
 			i++;
 		}
 		else if(strcmp(argv[i],"-startlevel") == 0) {

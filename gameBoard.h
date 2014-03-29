@@ -16,12 +16,15 @@ class gameBoard {
 	//Xwindow * xw;
 	bool isGraphics;
 	double seed;
+	std::istream * file;
 
+	Block generateBlock();
 	public:
 		gameBoard();
 		~gameBoard();
 		void setSeed(int pSeed);
 		void setLevel(int pLevel);
+		void setLevelZeroFile(std::istream * pFile);
 		//Block getCurrentBlock();
 		//Block getNextBlock();
 		void setGraphics();

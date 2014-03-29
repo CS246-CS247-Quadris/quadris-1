@@ -13,7 +13,6 @@ class Block {
   void right();
   void down();
   void setLevel(int);
-  //virtual vector<int,int> getPosition() = 0;
   virtual void rotateCCW()= 0;
   virtual void rotateCW()= 0;
   friend std::ostream &operator<<(std::ostream &out, const Block &bl);

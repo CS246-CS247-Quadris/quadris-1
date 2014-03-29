@@ -29,7 +29,7 @@ gameBoard::gameBoard() {
 		}
 	}
 
-	//define available blocks
+	//define available blocks [put s and z blocks at the back of array]
 	//availableBlocks[] = {};
 
 	//define blocks
@@ -77,6 +77,48 @@ void gameBoard::restart() {
 	nextBlock = NULL;
 }
 
+Block gameBoard::generateBlock() {
+	switch(level) {
+		case 0:
+			//read the next one from file...do we need a counter in the meantime
+			break;
+		case 1:
+			int i = rand() % 12;
+			switch(i) {
+				case 0:
+					return(availableBlocks[5]);
+					break;
+				case 1:
+					return(availableBlocks[6]);
+					break;
+				default:
+					int j = rand() % 5;
+					return(availableBlocks[j]);
+					break;
+			}
+			break;
+		case 2:
+			int i = rand() % 7;
+			return(availableBlocks[i]);
+			break;
+		case 3:
+			int i = rand() % 9;
+			switch(i) {
+				case 0: case 1:
+					return(availableBlocks[5]);
+					break;
+				case 2: case 3:
+					return(availableBlocks[6]);
+					break;
+				default:
+					int j = rand() % 5;
+					return(availableBlocks[j]);
+					break;
+			}
+			break;
+	}
+}
+
 void gameBoard::setSeed(int pSeed) {
 	seed = pSeed;
 }
@@ -92,6 +134,11 @@ bool gameBoard::getGraphics() {
 void gameBoard::setLevel(int pLevel) {
 	level = pLevel;
 }
+
+void gameBoard::setLevelZeroFile(std::istream * pFile) {
+	file = pFile;
+}
+
 void gameBoard::calculateScore() {
 
 }
@@ -102,7 +149,7 @@ void gameBoard::remove() {
 
 
 bool gameBoard::isLegal(int pPostion[]) {
-return true;		
+	return true;		
 }
 
 void gameBoard::levelUp() {
