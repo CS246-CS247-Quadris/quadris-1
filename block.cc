@@ -18,13 +18,17 @@ void Block::setLevel(int level){
 	current_level = level;
 }
 
+vector<Cell *> Block::getCells() {
+	return cells;
+}
+
 ostream &operator<<(ostream &out, const Block &bl) {
 	int c = 0;
 	stringstream ss;
 	for(int i = 0; i < 4 && c < 4; ++i) {
 		for(int j = 0; j < 4 && c < 4; ++j) {
-			if(bl.cells.at(c).x == i && bl.cells.at(c).y == j) {
-				ss << bl.cells.at(c);
+			if(bl.cells.at(c)->x == i && bl.cells.at(c)->y == j) {
+				ss << *bl.cells.at(c);
 				c++;
 			} else {
 				ss << ' ';

@@ -40,11 +40,13 @@ int main(int argc, char * argv[]) {
 			i++;
 		}
 	}
-
-	Block * blk = new iBlock(board);
-	cout << *blk;
-	blk->rotateCW();
-	cout << *blk;
+	cout << *board;
+	board->rotateCW();
+	cout << *board;
+	// Block * blk = new iBlock(board);
+	// cout << *blk;
+	// blk->right();
+	// cout << *blk;
 	//generate the current block and next block on the board
 	//blah blah blah
 

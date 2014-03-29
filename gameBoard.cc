@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <vector>
 #include "cell.h"
 #include "block.h"
 #include "gameBoard.h"
@@ -31,10 +32,15 @@ gameBoard::gameBoard() {
 	}
 
 	//define available blocks [put s and z blocks at the back of array]
-	//availableBlocks[] = {};
+	iBlock * iblk = new iBlock(this);
+	availableBlocks[0] = iblk;
 
 	//define blocks
 	currentBlock = generateBlock();
+	vector<Cell *> cells = currentBlock->getCells();
+	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
+		board[(*it)->x][(*it)->y] = *it;
+	}
 	nextBlock = generateBlock();
 }
 
@@ -82,6 +88,7 @@ Block * gameBoard::generateBlock() {
 	switch(level) {
 		case 0:
 			//read the next one from file...do we need a counter in the meantime
+			return(availableBlocks[0]);
 			break;
 		case 1: {
 			int i = rand() % 12;
@@ -178,7 +185,15 @@ void gameBoard::drop() {
 }
 
 void gameBoard::rotateCW() {
-
+	vector<Cell *> cells = currentBlock->getCells();
+	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
+		board[(*it)->x][(*it)->y] = new Cell((*it)->x,(*it)->y);
+	}
+	currentBlock->rotateCW();
+	cells = currentBlock->getCells();
+	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
+		board[(*it)->x][(*it)->y] = *it;
+	}
 }
 
 void gameBoard::rotateCCW() {
