@@ -16,30 +16,7 @@ void Block::setLevel(int level){
 	current_level = level;
 }
 
-void Block::left(){
 
-	cells.at(0).setXY(cells.at(0).x,cells.at(0).y-1);
-	cells.at(1).setXY(cells.at(1).x,cells.at(1).y-1);
-	cells.at(2).setXY(cells.at(2).x,cells.at(2).y-1);
-	cells.at(2).setXY(cells.at(3).x,cells.at(3).y-1);
-
-
-}
-void Block::right(){
-
-	cells.at(0).setXY(cells.at(0).x,cells.at(0).y+1);
-	cells.at(1).setXY(cells.at(1).x,cells.at(1).y+1);
-	cells.at(2).setXY(cells.at(2).x,cells.at(2).y+1);
-	cells.at(2).setXY(cells.at(3).x,cells.at(3).y+1);
-
-}
-void Block::down(){
-	cells.at(0).setXY(cells.at(0).x-1,cells.at(0).y);
-	cells.at(1).setXY(cells.at(1).x-1,cells.at(1).y);
-	cells.at(2).setXY(cells.at(2).x-1,cells.at(2).y);
-	cells.at(2).setXY(cells.at(3).x-1,cells.at(3).y);
-
-}
 
 ostream &operator<<(ostream &out, const Block &bl) {
 	int c = 0;
