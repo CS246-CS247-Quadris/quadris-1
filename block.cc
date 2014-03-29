@@ -18,10 +18,6 @@ void Block::setLevel(int level){
 	current_level = level;
 }
 
-void Block::left() {
-
-}
-
 ostream &operator<<(ostream &out, const Block &bl) {
 	int c = 0;
 	stringstream ss;
