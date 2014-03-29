@@ -6,6 +6,7 @@
 #include "block.h"
 #include "gameBoard.h"
 #include "iBlock.h"
+#include "jBlock.h"
 #define NUM_ROWS 18
 #define NUM_COLS 10
 
@@ -200,13 +201,21 @@ void gameBoard::postMove() {
 }
 
 void gameBoard::left() {
-	
+	this->preMove();
+	currentBlock->left();
+	this->postMove();
 }
 
 void gameBoard::right() {
+	this->preMove();
+	currentBlock->right();
+	this->postMove();
 }
 
 void gameBoard::down() {
+	this->preMove();
+	currentBlock->down();
+	this->postMove();
 }
 
 void gameBoard::drop() {
@@ -219,7 +228,9 @@ void gameBoard::rotateCW() {
 }
 
 void gameBoard::rotateCCW() {
-
+	this->preMove();
+	currentBlock->rotateCCW();
+	this->postMove();
 }
 
 ostream &operator<<(ostream &out, const gameBoard &b) {
