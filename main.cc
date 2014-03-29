@@ -41,8 +41,7 @@ int main(int argc, char * argv[]) {
 		}
 	}
 	cout << *board;
-	board->rotateCW();
-	cout << *board;
+
 	// Block * blk = new iBlock(board);
 	// cout << *blk;
 	// blk->right();
@@ -80,15 +79,15 @@ int main(int argc, char * argv[]) {
 			else if(cmdPossible > 1) { cerr << "too many possibilities" << endl; }
 			else {
 				cout << "your command: " << mult << "x " << command << endl;
-				if(!s.compare("restart")) { (*board).restart(); }
-				else if(!s.compare("levelup")) { for(int i = 0; i < mult; ++i) (*board).levelUp(); }
-				else if(!s.compare("leveldown")) { for(int i = 0; i < mult; ++i) (*board).levelDown(); }
-				else if(!s.compare("left")) { for(int i = 0; i < mult; ++i) (*board).left(); }
-				else if(!s.compare("right")) { for(int i = 0; i < mult; ++i) (*board).right(); }
-				else if(!s.compare("down")) { for(int i = 0; i < mult; ++i) (*board).down(); }
-				else if(!s.compare("drop")) { for(int i = 0; i < mult; ++i) (*board).drop(); }
-				else if(!s.compare("clockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCW(); }
-				else if(!s.compare("counterclockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCCW(); }
+				if(!command.compare("restart")) { (*board).restart(); }
+				else if(!command.compare("levelup")) { for(int i = 0; i < mult; ++i) (*board).levelUp(); }
+				else if(!command.compare("leveldown")) { for(int i = 0; i < mult; ++i) (*board).levelDown(); }
+				else if(!command.compare("left")) { for(int i = 0; i < mult; ++i) (*board).left(); }
+				else if(!command.compare("right")) { for(int i = 0; i < mult; ++i) (*board).right(); }
+				else if(!command.compare("down")) { for(int i = 0; i < mult; ++i) (*board).down(); }
+				else if(!command.compare("drop")) { for(int i = 0; i < mult; ++i) (*board).drop(); }
+				else if(!command.compare("clockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCW(); }
+				else if(!command.compare("counterclockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCCW(); }
 			}
 			cout << *board;
 			//after the move, probably should check if they lose yet

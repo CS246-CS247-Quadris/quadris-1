@@ -31,17 +31,16 @@ gameBoard::gameBoard() {
 		}
 	}
 
-	//define available blocks [put s and z blocks at the back of array]
-	iBlock * iblk = new iBlock(this);
-	availableBlocks[0] = iblk;
-
 	//define blocks
 	currentBlock = generateBlock();
+	nextBlock = generateBlock();
+
+	//Put the current block in the grid
 	vector<Cell *> cells = currentBlock->getCells();
 	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
 		board[(*it)->x][(*it)->y] = *it;
 	}
-	nextBlock = generateBlock();
+	
 }
 
 gameBoard::~gameBoard(){
@@ -88,41 +87,55 @@ Block * gameBoard::generateBlock() {
 	switch(level) {
 		case 0:
 			//read the next one from file...do we need a counter in the meantime
-			return(availableBlocks[0]);
+			return new iBlock(this);
 			break;
 		case 1: {
 			int i = rand() % 12;
 			switch(i) {
 				case 0:
-					return(availableBlocks[5]);
+					//return new sBlock(this);
 					break;
 				case 1:
-					return(availableBlocks[6]);
+					//return new zBlock(this);
 					break;
 				default:
 					int j = rand() % 5;
-					return(availableBlocks[j]);
-					break;
+					if(j == 0) { return new iBlock(this); }
+					// if(j == 1) { return new jBlock(this); }
+					// if(j == 2) { return new lBlock(this); }
+					// if(j == 3) { return new oBlock(this); }
+					// if(j == 4) { return new tBlock(this); }
+				break;
 			}
 			break;
 		}
 		case 2: {
 			int i = rand() % 7;
-			return(availableBlocks[i]);
+			// if(i == 0) { return new iBlock(this); }
+			// if(i == 1) { return new jBlock(this); }
+			// if(i == 2) { return new lBlock(this); }
+			// if(i == 3) { return new oBlock(this); }
+			// if(i == 4) { return new sBlock(this); }
+			// if(i == 5) { return new zBlock(this); }
+			// if(i == 6) { return new tBlock(this); }
 			break;
 		}
 		case 3: {
 			int i = rand() % 9;
 			switch(i) {
 				case 0: case 1:
-					return(availableBlocks[5]);
+					//return new sBlock(this);
 					break;
 				case 2: case 3:
-					return(availableBlocks[6]);
+					//return new zBlock(this);
 					break;
 				default:
 					int j = rand() % 5;
-					return(availableBlocks[j]);
+					if(j == 0) { return new iBlock(this); }
+					// if(j == 1) { return new jBlock(this); }
+					// if(j == 2) { return new lBlock(this); }
+					// if(j == 3) { return new oBlock(this); }
+					// if(j == 4) { return new tBlock(this); }
 					break;
 			}
 			break;
@@ -171,6 +184,20 @@ void gameBoard::levelDown() {
 	level == 0 ? level = 0 : level--;
 }
 
+void gameBoard::preMove() {
+	vector<Cell *> cells = currentBlock->getCells();
+	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
+		board[(*it)->x][(*it)->y] = new Cell((*it)->x,(*it)->y);
+	}
+}
+
+void gameBoard::postMove() {
+	vector<Cell *> cells = currentBlock->getCells();
+	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
+		board[(*it)->x][(*it)->y] = *it;
+	}
+}
+
 void gameBoard::left() {
 	
 }
@@ -185,15 +212,9 @@ void gameBoard::drop() {
 }
 
 void gameBoard::rotateCW() {
-	vector<Cell *> cells = currentBlock->getCells();
-	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
-		board[(*it)->x][(*it)->y] = new Cell((*it)->x,(*it)->y);
-	}
+	this->preMove();
 	currentBlock->rotateCW();
-	cells = currentBlock->getCells();
-	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
-		board[(*it)->x][(*it)->y] = *it;
-	}
+	this->postMove();
 }
 
 void gameBoard::rotateCCW() {

@@ -6,7 +6,6 @@ class Block;
 
 class gameBoard {
 	Cell ***board;
-	Block * availableBlocks[7];
 	Block * currentBlock;
 	Block * nextBlock;
 	int currentPosition[2];
@@ -19,6 +18,8 @@ class gameBoard {
 	std::istream * file;
 
 	Block * generateBlock();
+	void preMove();
+	void postMove();
 	public:
 		gameBoard();
 		~gameBoard();
