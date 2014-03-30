@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#define NUM_ROWS 18
+#define NUM_COLS 10
 
 class Cell;
 class Block;
@@ -8,7 +10,6 @@ class gameBoard {
 	Cell ***board;
 	Block * currentBlock;
 	Block * nextBlock;
-	int currentPosition[2];
 	int level;
 	int currentScore;
 	int hiScore;
@@ -26,13 +27,14 @@ class gameBoard {
 		void setSeed(int pSeed);
 		void setLevel(int pLevel);
 		void setLevelZeroFile(std::istream * pFile);
+		Cell * getCell(int x, int y);
 		//Block getCurrentBlock();
 		//Block getNextBlock();
 		void setGraphics();
 		bool getGraphics();
 		void calculateScore();
 		void remove(int row);
-		//bool isLegal(int pPosition[2]);
+		bool isLegal();
 		void restart();
 		void levelUp();
 		void levelDown();

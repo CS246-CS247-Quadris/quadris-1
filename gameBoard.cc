@@ -7,8 +7,6 @@
 #include "gameBoard.h"
 #include "iBlock.h"
 #include "jBlock.h"
-#define NUM_ROWS 18
-#define NUM_COLS 10
 
 using namespace std;
 
@@ -37,10 +35,7 @@ gameBoard::gameBoard() {
 	nextBlock = generateBlock();
 
 	//Put the current block in the grid
-	vector<Cell *> cells = currentBlock->getCells();
-	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
-		board[(*it)->x][(*it)->y] = *it;
-	}
+	this->postMove();
 	
 }
 
@@ -173,9 +168,9 @@ void gameBoard::remove(int row) {
 
 }
 
-// bool gameBoard::isLegal(int pPostion[]) {	
-// 	return true;		
-// }
+Cell * gameBoard::getCell(int x, int y) {
+	return board[x][y];
+}
 
 void gameBoard::levelUp() {
 	level == 3 ? level = 3 : level++;
@@ -202,23 +197,52 @@ void gameBoard::postMove() {
 
 void gameBoard::left() {
 	this->preMove();
-	currentBlock->left();
+	bool legal = currentBlock->isLegalMove(0,-1);
+	if(legal) {
+		cout << "it is legal" << endl;
+		currentBlock->left();
+	} else {
+		cout << "it is not legal" << endl;
+	}
 	this->postMove();
 }
 
 void gameBoard::right() {
 	this->preMove();
-	currentBlock->right();
+	bool legal = currentBlock->isLegalMove(0,1);
+	if(legal) {
+		cout << "it is legal" << endl;
+		currentBlock->right();
+	} else {
+		cout << "it is not legal" << endl;
+	}
 	this->postMove();
 }
 
 void gameBoard::down() {
-	this->preMove();
-	currentBlock->down();
-	this->postMove();
+	bool legal = currentBlock->isLegalMove(1,0);
+	if(legal) {
+		cout << "it is legal" << endl;
+		this->preMove();
+		currentBlock->down();
+		this->postMove();
+	} else {
+		cout << "it is not legal" << endl;
+	}
 }
 
 void gameBoard::drop() {
+	this->preMove();
+	int c = -1;
+	bool legal;
+	do {
+		c++;
+		legal = currentBlock->isLegalMove(c,0);
+	} while(legal);
+	for(int i = 0; i < (c-1); ++i) {
+		currentBlock->down();
+	}
+	this->postMove();
 }
 
 void gameBoard::rotateCW() {

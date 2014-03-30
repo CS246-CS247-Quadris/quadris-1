@@ -12,6 +12,7 @@ Block::Block(gameBoard * pBoard) {
         current_level = 0;
         current_block_id = 0;
 }
+
 Block::~Block(){}
 
 void Block::setLevel(int level){
@@ -20,6 +21,24 @@ void Block::setLevel(int level){
 
 vector<Cell *> Block::getCells() {
 	return cells;
+}
+
+char Block::getBlockType() {
+	return block_type;
+}
+
+bool Block::isLegalMove(int pX, int pY) {
+	for(int i = 0; i < 4; ++i) {
+		int tmpX = cells.at(i)->x+pX;
+		int tmpY = cells.at(i)->y+pY;
+		if(tmpX < 0 || tmpX > (NUM_ROWS-1) || tmpY < 0 || tmpY > (NUM_COLS-1)) {
+			return false;
+		}
+		if(board->getCell(tmpX,tmpY)->filled) {
+			return false;			
+		}
+	}
+	return true;
 }
 
 ostream &operator<<(ostream &out, const Block &bl) {

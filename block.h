@@ -15,12 +15,15 @@ class Block {
   ~Block();
   void setLevel(int);
   std::vector<Cell *> getCells();
+  char getBlockType();
   virtual void rotateCCW()= 0;
   virtual void rotateCW()= 0;
   virtual void left() = 0;
   virtual void right() = 0;
   virtual void down() = 0;
   friend std::ostream &operator<<(std::ostream &out, const Block &bl);
+  bool isLegalMove(int pX, int pY);
+  //virtual bool isLegalRotate(int pDirection); //0 - clockwise, 1 - counterclockwise
  protected:
   std::vector<Cell *> cells;
   int current_block_id;
@@ -28,4 +31,5 @@ class Block {
   int current_level;
 
 };
+
 #endif

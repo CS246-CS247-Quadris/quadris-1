@@ -41,11 +41,6 @@ int main(int argc, char * argv[]) {
 		}
 	}
 	cout << *board;
-
-	// Block * blk = new iBlock(board);
-	// cout << *blk;
-	// blk->right();
-	// cout << *blk;
 	//generate the current block and next block on the board
 	//blah blah blah
 
@@ -55,14 +50,16 @@ int main(int argc, char * argv[]) {
 		} else {
 			//get the multiplier if applicable
 			int tmp = (int)s[0]-48;
+			bool isANum = false;
 			int mult = 0;
 			while(tmp > -1 && tmp < 10) {
+				isANum = true;
 				mult = mult*10 + tmp;
 				s = s.substr(1,s.length()-1);
 				tmp = (int)s[0]-48;
 			}
 			//default case
-			if(mult == 0) mult = 1;
+			if(!isANum) mult = 1;
 
 			//command autocomplete
 			string commands[] = {"clockwise","counterclockwise","down","drop","left","levelup","leveldown","restart","right"};
