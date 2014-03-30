@@ -49,6 +49,25 @@ void iBlock::down(){
 	cells.at(3)->setXY(cells.at(3)->x+1,cells.at(3)->y);
 }
 
-// bool iBlock::isLegalRotate(int pDirection) {
-
-// }
+bool iBlock::isLegalRotate(int pDirection) {
+	int tmpX, tmpY;
+	switch(pDirection) {
+		case 0:
+			for(int i = 1; i < 4; ++i) {
+				tmpX = cells.at(i)->x;
+				tmpY = cells.at(i)->y-i;
+				if(tmpX < 0 || tmpX > (NUM_ROWS-1) || tmpY < 0 || tmpY > (NUM_COLS-1)) return false;
+				if(board->getCell(tmpX,tmpY)->filled) return false;
+			}
+			break;
+		case 1:
+			for(int i = 1; i < 4; ++i) {
+				tmpX = cells.at(i)->x-i;
+				tmpY = cells.at(i)->y;
+				if(tmpX < 0 || tmpX > (NUM_ROWS-1) || tmpY < 0 || tmpY > (NUM_COLS-1)) return false;
+				if(board->getCell(tmpX,tmpY)->filled) return false;
+			}
+			break;
+	}
+	return true;
+}

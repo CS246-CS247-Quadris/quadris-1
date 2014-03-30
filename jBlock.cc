@@ -82,3 +82,6 @@ void jBlock::down(){
 	cells.at(2)->setXY(cells.at(3)->x-1,cells.at(3)->y);
 
 }
+
+
+bool jBlock::isLegalRotate(int pDirection) { return true; }

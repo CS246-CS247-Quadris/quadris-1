@@ -12,6 +12,6 @@ class oBlock : public Block {
   virtual void left();
   virtual void right();
   virtual void down();
-  //virtual bool isLegalRotate(int pDirection); //0 - clockwise, 1 - counterclockwise	
+  virtual bool isLegalRotate(int pDirection); //0 - clockwise, 1 - counterclockwise	
 };
 #endif

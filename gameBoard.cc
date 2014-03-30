@@ -247,13 +247,25 @@ void gameBoard::drop() {
 
 void gameBoard::rotateCW() {
 	this->preMove();
-	currentBlock->rotateCW();
+	bool legal = currentBlock->isLegalRotate(0);
+	if(legal) {
+		cout << "it is legal" << endl;
+		currentBlock->rotateCW();
+	} else {
+		cout << "it is not legal" << endl;
+	}
 	this->postMove();
 }
 
 void gameBoard::rotateCCW() {
 	this->preMove();
-	currentBlock->rotateCCW();
+	bool legal = currentBlock->isLegalRotate(1);
+	if(legal) {
+		cout << "it is legal" << endl;
+		currentBlock->rotateCCW();
+	} else {
+		cout << "it is not legal" << endl;
+	}
 	this->postMove();
 }
 
