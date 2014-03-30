@@ -83,7 +83,7 @@ Block * gameBoard::generateBlock() {
 	switch(level) {
 		case 0:
 			//read the next one from file...do we need a counter in the meantime
-			return new iBlock(this);
+			return new jBlock(this);
 			break;
 		case 1: {
 			int i = rand() % 12;
