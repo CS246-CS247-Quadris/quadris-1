@@ -4,15 +4,15 @@
 
 class tBlock : public Block {
 
-  Cell **cells;
-
  public:
-  tBlock();
+  tBlock(gameBoard * pBoard);
   ~tBlock();
   virtual void rotateCCW();
   virtual void rotateCW();
-
- friend std::ostream &operator<<(std::ostream &out, const iBlock &bl);
+  virtual void left();
+  virtual void right();
+  virtual void down();
+  virtual bool isLegalRotate(int pDirection);
 	
 };
 #endif
