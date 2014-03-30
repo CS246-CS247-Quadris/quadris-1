@@ -86,3 +86,5 @@ void tBlock::down(){
 	cells.at(3)->setXY(cells.at(3)->x+1,cells.at(3)->y);
 
 }
+
+bool tBlock::isLegalRotate(int pDirection) { return true; }

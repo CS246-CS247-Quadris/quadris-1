@@ -52,3 +52,5 @@ void sBlock::down(){
 	cells.at(3)->setXY(cells.at(3)->x+1,cells.at(3)->y);
 
 }
+
+bool sBlock::isLegalRotate(int pDirection) { return true; }

@@ -7,6 +7,12 @@
 #include "gameBoard.h"
 #include "iBlock.h"
 #include "jBlock.h"
+#include "oBlock.h"
+#include "sBlock.h"
+#include "zBlock.h"
+#include "lBlock.h"
+#include "tBlock.h"
+
 
 using namespace std;
 
@@ -83,7 +89,7 @@ Block * gameBoard::generateBlock() {
 	switch(level) {
 		case 0:
 			//read the next one from file...do we need a counter in the meantime
-			return new jBlock(this);
+			return new tBlock(this);
 			break;
 		case 1: {
 			int i = rand() % 12;

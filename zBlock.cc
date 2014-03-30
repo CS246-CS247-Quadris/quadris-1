@@ -52,3 +52,5 @@ void zBlock::down(){
 	cells.at(3)->setXY(cells.at(3)->x+1,cells.at(3)->y);
 
 }
+
+bool zBlock::isLegalRotate(int pDirection) { return true; }
