@@ -19,6 +19,7 @@ using namespace std;
 gameBoard::gameBoard() {
 
 	level = 0;
+	blockCounter = 0;
 	levelZeroCount = 1;
 	currentScore = 0;
 	hiScore = 0;
@@ -87,6 +88,7 @@ void gameBoard::restart() {
 }
 
 Block * gameBoard::generateBlock() {
+	blockCounter++;
 	switch(level) {
 		case 0: {
 			//read the next one from file...do we need a counter in the meantime
@@ -97,13 +99,13 @@ Block * gameBoard::generateBlock() {
 			}
 			levelZeroCount++;
 			switch(blockType) {
-				case 'I': { return new iBlock(this); break; }
-				case 'J': { return new jBlock(this); break; }
-				case 'O': { return new oBlock(this); break; }
-				case 'S': { return new sBlock(this); break; }
-				case 'Z': { return new zBlock(this); break; }
-				case 'L': { return new lBlock(this); break; }
-				case 'T': { return new tBlock(this); break; }
+				case 'I': { return new iBlock(this,blockCounter); break; }
+				case 'J': { return new jBlock(this,blockCounter); break; }
+				case 'O': { return new oBlock(this,blockCounter); break; }
+				case 'S': { return new sBlock(this,blockCounter); break; }
+				case 'Z': { return new zBlock(this,blockCounter); break; }
+				case 'L': { return new lBlock(this,blockCounter); break; }
+				case 'T': { return new tBlock(this,blockCounter); break; }
 			}
 			break;
 		}
@@ -111,49 +113,49 @@ Block * gameBoard::generateBlock() {
 			int i = rand() % 12;
 			switch(i) {
 				case 0:
-					return new sBlock(this);
+					return new sBlock(this,blockCounter);
 					break;
 				case 1:
-					return new zBlock(this);
+					return new zBlock(this,blockCounter);
 					break;
 				default:
 					int j = rand() % 5;
-					if(j == 0) { return new iBlock(this); }
-					if(j == 1) { return new jBlock(this); }
-					if(j == 2) { return new lBlock(this); }
-					if(j == 3) { return new oBlock(this); }
-					if(j == 4) { return new tBlock(this); }
+					if(j == 0) { return new iBlock(this,blockCounter); }
+					if(j == 1) { return new jBlock(this,blockCounter); }
+					if(j == 2) { return new lBlock(this,blockCounter); }
+					if(j == 3) { return new oBlock(this,blockCounter); }
+					if(j == 4) { return new tBlock(this,blockCounter); }
 				break;
 			}
 			break;
 		}
 		case 2: {
 			int i = rand() % 7;
-			if(i == 0) { return new iBlock(this); }
-			if(i == 1) { return new jBlock(this); }
-			if(i == 2) { return new lBlock(this); }
-			if(i == 3) { return new oBlock(this); }
-			if(i == 4) { return new sBlock(this); }
-			if(i == 5) { return new zBlock(this); }
-			if(i == 6) { return new tBlock(this); }
+			if(i == 0) { return new iBlock(this,blockCounter); }
+			if(i == 1) { return new jBlock(this,blockCounter); }
+			if(i == 2) { return new lBlock(this,blockCounter); }
+			if(i == 3) { return new oBlock(this,blockCounter); }
+			if(i == 4) { return new sBlock(this,blockCounter); }
+			if(i == 5) { return new zBlock(this,blockCounter); }
+			if(i == 6) { return new tBlock(this,blockCounter); }
 			break;
 		}
 		case 3: {
 			int i = rand() % 9;
 			switch(i) {
 				case 0: case 1:
-					return new sBlock(this);
+					return new sBlock(this,blockCounter);
 					break;
 				case 2: case 3:
-					return new zBlock(this);
+					return new zBlock(this,blockCounter);
 					break;
 				default:
 					int j = rand() % 5;
-					if(j == 0) { return new iBlock(this); }
-					if(j == 1) { return new jBlock(this); }
-					if(j == 2) { return new lBlock(this); }
-					if(j == 3) { return new oBlock(this); }
-					if(j == 4) { return new tBlock(this); }
+					if(j == 0) { return new iBlock(this,blockCounter); }
+					if(j == 1) { return new jBlock(this,blockCounter); }
+					if(j == 2) { return new lBlock(this,blockCounter); }
+					if(j == 3) { return new oBlock(this,blockCounter); }
+					if(j == 4) { return new tBlock(this,blockCounter); }
 					break;
 			}
 			break;
@@ -186,30 +188,6 @@ int gameBoard::getLevel() {
 	return level;
 }
 
-void gameBoard::calculateScore() {
-	int numLinesCleared = 0;
-	for(int i = 0; i < NUM_ROWS-3; ++i) {
-		bool fullLine = true;
-		for(int j = 0; j < NUM_COLS && fullLine; ++j) {
-			if(getCell(i,j)->block_type == ' ') {
-				fullLine = false;
-			}
-		}
-		if(fullLine) {
-			//go through each cell in the line and see if any neighbouring cells have the same unique ID
-			//if so, no points for block clear
-			for(int j = 0; j < NUM_COLS; ++j) {
-				if(checkNeighbourId(i,j)) {
-					currentScore += (getCell(i,j)->levelCreated + 1)^2;
-				}
-			}
-			remove(i);
-			numLinesCleared++;
-		}
-	}
-	currentScore += (level+numLinesCleared)^2;
-}
-
 bool gameBoard::checkNeighbourId(int x, int y) {
 	int id = getCell(x,y)->block_id;
 	if(x+1 < NUM_ROWS-3) {
@@ -227,8 +205,44 @@ bool gameBoard::checkNeighbourId(int x, int y) {
 	return true;
 }
 
-void gameBoard::remove(int row) {
+void gameBoard::calculateScore() {
+	int numLinesCleared = 0;
+	for(int i = NUM_ROWS-1; i > 3; --i) {
+		bool fullLine = true;
+		for(int j = 0; j < NUM_COLS && fullLine; ++j) {
+			if(getCell(i-numLinesCleared,j)->block_type == ' ') {
+				fullLine = false;
+			}
+		}
+		if(fullLine) {
+			//go through each cell in the line and see if any neighbouring cells have the same unique ID
+			//if so, no points for block clear
+			//but it doesn't work right now
+			for(int j = 0; j < NUM_COLS; ++j) {
+				if(checkNeighbourId(i-numLinesCleared,j)) {
+					currentScore += (getCell(i-numLinesCleared,j)->levelCreated + 1)^2;
+				}
+			}
+			remove(i-numLinesCleared);
+			numLinesCleared++;
+		}
+	}
+	if(numLinesCleared != 0) { currentScore += (level+numLinesCleared)^2; }
+}
 
+void gameBoard::remove(int row) {
+	//delete the row of choice
+	//move all the rows down
+	//add a new row at the top
+	for(int i = row; i > 0; --i) {
+		for(int j = 0; j < NUM_COLS; ++j) {
+			delete board[i][j];
+			board[i][j] = board[i-1][j];
+		}	
+	}
+	for(int j = 0; j < NUM_COLS; ++j) {
+		board[3][j] = new Cell(3,j);
+	}
 }
 
 Cell * gameBoard::getCell(int x, int y) {
@@ -294,6 +308,7 @@ void gameBoard::drop() {
 		currentBlock->down();
 	}
 	this->postMove();
+	//calculateScore();
 
 	//point to a new block
 	delete currentBlock;

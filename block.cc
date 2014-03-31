@@ -10,7 +10,6 @@ using namespace std;
 Block::Block(gameBoard * pBoard) {
 		board = pBoard;
         current_level = pBoard->getLevel();
-        current_block_id = 0;
 }
 
 Block::~Block(){}

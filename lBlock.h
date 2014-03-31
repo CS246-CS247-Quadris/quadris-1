@@ -5,7 +5,7 @@
 class lBlock : public Block {
 
  public:
-  lBlock(gameBoard * pBoard);
+  lBlock(gameBoard * pBoard, int pId);
   ~lBlock();
   virtual void rotateCCW();
   virtual void rotateCW();

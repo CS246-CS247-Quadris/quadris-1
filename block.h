@@ -7,7 +7,6 @@
 class gameBoard;
 
 class Block {
-
  public:
   Block(gameBoard * pBoard);
   ~Block();
@@ -25,10 +24,8 @@ class Block {
  protected:
   gameBoard * board;
   std::vector<Cell *> cells;
-  int current_block_id;
   char block_type;
   int current_level;
-
 };
 
 #endif

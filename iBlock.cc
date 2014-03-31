@@ -2,13 +2,12 @@
 
 using namespace std;
 
-iBlock::iBlock(gameBoard * pBoard):Block(pBoard) {
-	cells.push_back(new Cell(3,0,'I',current_level,true));
-	cells.push_back(new Cell(3,1,'I',current_level,true));
-	cells.push_back(new Cell(3,2,'I',current_level,true));
-	cells.push_back(new Cell(3,3,'I',current_level,true));
-	block_type = 'i';
-	current_block_id++;
+iBlock::iBlock(gameBoard * pBoard, int pId):Block(pBoard) {
+	cells.push_back(new Cell(pId,3,0,'I',current_level,true));
+	cells.push_back(new Cell(pId,3,1,'I',current_level,true));
+	cells.push_back(new Cell(pId,3,2,'I',current_level,true));
+	cells.push_back(new Cell(pId,3,3,'I',current_level,true));
+	block_type = 'I';
 }
 iBlock::~iBlock() {}
 

@@ -9,9 +9,8 @@ Cell::Cell(int pX, int pY) : x(pX), y(pY) {
 	filled = false;
 }
 
-Cell::Cell(int pX, int pY, char pBlock_Type, int pLevelCreated, bool pFilled) : x(pX), y(pY), block_type(pBlock_Type), levelCreated(pLevelCreated), filled(pFilled) {
-	block_id = -1;
-}
+Cell::Cell(int id, int pX, int pY, char pBlock_Type, int pLevelCreated, bool pFilled) : x(pX), y(pY), block_id(id),
+																						block_type(pBlock_Type), levelCreated(pLevelCreated), filled(pFilled) {}
 
 void Cell::setXY(int pX, int pY) {
 	x = pX;

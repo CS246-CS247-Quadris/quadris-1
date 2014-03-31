@@ -5,7 +5,7 @@
 class jBlock : public Block {
 
  public:
-  jBlock(gameBoard * pBoard);
+  jBlock(gameBoard * pBoard, int pId);
   ~jBlock();
   virtual void rotateCCW();
   virtual void rotateCW();

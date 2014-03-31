@@ -5,7 +5,7 @@
 class zBlock : public Block {
 
  public:
-  zBlock(gameBoard * pBoard);
+  zBlock(gameBoard * pBoard, int pId);
   ~zBlock();
   virtual void rotateCCW();
   virtual void rotateCW();

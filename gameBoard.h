@@ -10,11 +10,13 @@ class Cell;
 class Block;
 
 class gameBoard {
+
 	Cell ***board;
 	Block * currentBlock;
 	Block * nextBlock;
 	int level;
 	int levelZeroCount;
+	int blockCounter;
 	int currentScore;
 	int hiScore;
 	//Xwindow * xw;

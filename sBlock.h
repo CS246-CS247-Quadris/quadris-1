@@ -5,7 +5,7 @@
 class sBlock : public Block {
 
  public:
-  sBlock(gameBoard * pBoard);
+  sBlock(gameBoard * pBoard, int pId);
   ~sBlock();
   virtual void rotateCCW();
   virtual void rotateCW();

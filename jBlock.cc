@@ -1,12 +1,11 @@
 #include "jBlock.h"
 using namespace std;
 
-jBlock::jBlock(gameBoard * pBoard):Block(pBoard) {
-	cells.push_back(new Cell(1,0,'J',current_level,true));
-	cells.push_back(new Cell(2,0,'J',current_level,true));
-	cells.push_back(new Cell(2,1,'J',current_level,true));
-	cells.push_back(new Cell(2,2,'J',current_level,true));
-	current_block_id++;
+jBlock::jBlock(gameBoard * pBoard, int pId):Block(pBoard) {
+	cells.push_back(new Cell(pId,1,0,'J',current_level,true));
+	cells.push_back(new Cell(pId,2,0,'J',current_level,true));
+	cells.push_back(new Cell(pId,2,1,'J',current_level,true));
+	cells.push_back(new Cell(pId,2,2,'J',current_level,true));
 }
 jBlock::~jBlock() {}
 

@@ -1,11 +1,10 @@
 #include "zBlock.h"
 
-zBlock::zBlock(gameBoard * pBoard):Block(pBoard) {
-	cells.push_back(new Cell(1,0,'Z',current_level,true));
-	cells.push_back(new Cell(1,1,'Z',current_level,true));
-	cells.push_back(new Cell(2,1,'Z',current_level,true));
-	cells.push_back(new Cell(2,2,'Z',current_level,true));
-	current_block_id++;
+zBlock::zBlock(gameBoard * pBoard, int pId):Block(pBoard) {
+	cells.push_back(new Cell(pId,1,0,'Z',current_level,true));
+	cells.push_back(new Cell(pId,1,1,'Z',current_level,true));
+	cells.push_back(new Cell(pId,2,1,'Z',current_level,true));
+	cells.push_back(new Cell(pId,2,2,'Z',current_level,true));
 }
 zBlock::~zBlock() {}
 

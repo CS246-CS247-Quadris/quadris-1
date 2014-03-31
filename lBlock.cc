@@ -1,11 +1,10 @@
 #include "lBlock.h"
 
-lBlock::lBlock(gameBoard * pBoard):Block(pBoard) {
-	cells.push_back(new Cell(1,2,'l',current_level,true));
-	cells.push_back(new Cell(2,0,'l',current_level,true));
-	cells.push_back(new Cell(2,1,'l',current_level,true));
-	cells.push_back(new Cell(2,2,'l',current_level,true));
-	current_block_id++;
+lBlock::lBlock(gameBoard * pBoard, int pId):Block(pBoard) {
+	cells.push_back(new Cell(pId,1,2,'l',current_level,true));
+	cells.push_back(new Cell(pId,2,0,'l',current_level,true));
+	cells.push_back(new Cell(pId,2,1,'l',current_level,true));
+	cells.push_back(new Cell(pId,2,2,'l',current_level,true));
 }
 lBlock::~lBlock() {}
 
