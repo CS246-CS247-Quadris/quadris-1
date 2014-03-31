@@ -44,7 +44,7 @@ int main(int argc, char * argv[]) {
 	//generate the current block and next block on the board
 	//blah blah blah
 
-        while(cin >> s) {
+    while(cin >> s) {
 		if(s.length() < 2) {
 			cerr << "invalid command" << endl;
 		} else {
@@ -90,4 +90,5 @@ int main(int argc, char * argv[]) {
 			//after the move, probably should check if they lose yet
 		}
 	}
+	delete board;
 }

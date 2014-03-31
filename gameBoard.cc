@@ -236,6 +236,12 @@ void gameBoard::drop() {
 		currentBlock->down();
 	}
 	this->postMove();
+
+	//point to a new block
+	delete currentBlock;
+	currentBlock = nextBlock;
+	this->postMove();
+	nextBlock = generateBlock();
 }
 
 void gameBoard::rotateCW() {
