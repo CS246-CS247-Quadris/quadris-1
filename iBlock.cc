@@ -1,6 +1,5 @@
 #include "iBlock.h"
-#include "gameBoard.h"
-#define SIZE 4
+
 using namespace std;
 
 iBlock::iBlock(gameBoard * pBoard):Block(pBoard) {

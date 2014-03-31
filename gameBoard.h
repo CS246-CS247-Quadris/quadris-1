@@ -1,3 +1,6 @@
+#ifndef __GAMEBOARD_H__
+#define __GAMEBOARD_H__
+
 #include <iostream>
 #include <string>
 #define NUM_ROWS 18
@@ -44,3 +47,4 @@ class gameBoard {
 		void rotateCCW();
 		friend std::ostream &operator<<(std::ostream &out, const gameBoard &b);
 };
+#endif
