@@ -4,10 +4,10 @@
 using namespace std;
 
 iBlock::iBlock(gameBoard * pBoard):Block(pBoard) {
-	cells.push_back(new Cell(3,0,'I',current_level,true));
-	cells.push_back(new Cell(3,1,'I',current_level,true));
-	cells.push_back(new Cell(3,2,'I',current_level,true));
-	cells.push_back(new Cell(3,3,'I',current_level,true));
+	cells.push_back(new Cell(0,0,'I',current_level,true));
+	cells.push_back(new Cell(0,1,'I',current_level,true));
+	cells.push_back(new Cell(0,2,'I',current_level,true));
+	cells.push_back(new Cell(0,3,'I',current_level,true));
 	block_type = 'i';
 	current_block_id++;
 }

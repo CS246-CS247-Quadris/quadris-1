@@ -1,10 +1,10 @@
 #include "jBlock.h"
 
 jBlock::jBlock(gameBoard * pBoard):Block(pBoard) {
-	cells.push_back(new Cell(2,0,'J',current_level,true));
-	cells.push_back(new Cell(3,0,'J',current_level,true));
-	cells.push_back(new Cell(3,1,'J',current_level,true));
-	cells.push_back(new Cell(3,2,'J',current_level,true));
+	cells.push_back(new Cell(0,0,'J',current_level,true));
+	cells.push_back(new Cell(1,0,'J',current_level,true));
+	cells.push_back(new Cell(1,1,'J',current_level,true));
+	cells.push_back(new Cell(1,2,'J',current_level,true));
 	current_block_id++;
 }
 jBlock::~jBlock() {}

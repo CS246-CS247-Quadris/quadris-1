@@ -1,10 +1,10 @@
 #include "sBlock.h"
 
 sBlock::sBlock(gameBoard * pBoard):Block(pBoard) {
-	cells.push_back(new Cell(2,1,'S',current_level,true));
-	cells.push_back(new Cell(2,2,'S',current_level,true));
-	cells.push_back(new Cell(3,0,'S',current_level,true));
-	cells.push_back(new Cell(3,1,'S',current_level,true));
+	cells.push_back(new Cell(0,1,'S',current_level,true));
+	cells.push_back(new Cell(0,2,'S',current_level,true));
+	cells.push_back(new Cell(1,0,'S',current_level,true));
+	cells.push_back(new Cell(1,1,'S',current_level,true));
 	current_block_id++;
 }
 sBlock::~sBlock() {}

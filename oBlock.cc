@@ -1,10 +1,10 @@
 #include "oBlock.h"
 
 oBlock::oBlock(gameBoard * pBoard):Block(pBoard) {
-	cells.push_back(new Cell(2,0,'O',current_level,true));
-	cells.push_back(new Cell(2,1,'O',current_level,true));
-	cells.push_back(new Cell(3,0,'O',current_level,true));
-	cells.push_back(new Cell(3,1,'O',current_level,true));
+	cells.push_back(new Cell(0,0,'O',current_level,true));
+	cells.push_back(new Cell(0,1,'O',current_level,true));
+	cells.push_back(new Cell(1,0,'O',current_level,true));
+	cells.push_back(new Cell(1,1,'O',current_level,true));
 	current_block_id++;
 }
 oBlock::~oBlock() {}

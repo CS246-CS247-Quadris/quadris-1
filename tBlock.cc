@@ -1,10 +1,10 @@
 #include "tBlock.h"
 
 tBlock::tBlock(gameBoard * pBoard):Block(pBoard) {
-	cells.push_back(new Cell(2,0,'T',current_level,true));
-	cells.push_back(new Cell(2,1,'T',current_level,true));
-	cells.push_back(new Cell(2,2,'T',current_level,true));
-	cells.push_back(new Cell(3,1,'T',current_level,true));
+	cells.push_back(new Cell(0,0,'T',current_level,true));
+	cells.push_back(new Cell(0,1,'T',current_level,true));
+	cells.push_back(new Cell(0,2,'T',current_level,true));
+	cells.push_back(new Cell(1,1,'T',current_level,true));
 	current_block_id++;
 }
 
