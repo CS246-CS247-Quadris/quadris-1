@@ -2,7 +2,6 @@
 #include <string>
 #include <cstring>
 #include <sstream>
-#include <fstream>
 #include "gameBoard.h"
 #include "iBlock.h"
 
@@ -28,8 +27,7 @@ int main(int argc, char * argv[]) {
 			i++;
 		}
 		else if(strcmp(argv[i],"-scriptfile") == 0) {
-			ifstream * file = new ifstream(argv[i+1]);
-			board->setLevelZeroFile(file);
+			board->setFileName(string(argv[i+1]));
 			i++;
 		}
 		else if(strcmp(argv[i],"-startlevel") == 0) {

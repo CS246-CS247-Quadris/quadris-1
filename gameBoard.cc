@@ -2,6 +2,7 @@
 #include <string>
 #include <cstdlib>
 #include <vector>
+#include <fstream>
 #include "cell.h"
 #include "block.h"
 #include "gameBoard.h"
@@ -18,10 +19,12 @@ using namespace std;
 gameBoard::gameBoard() {
 
 	level = 0;
+	levelZeroCount = 1;
 	currentScore = 0;
 	hiScore = 0;
 	isGraphics = false;
 	seed = 0;
+	fileName = "sequence.txt";
 	
 	//xw = new XWindow();
 	//xw = NULL;
@@ -41,7 +44,6 @@ gameBoard::gameBoard() {
 
 	//Put the current block in the grid
 	this->postMove();
-	
 }
 
 gameBoard::~gameBoard(){
@@ -86,10 +88,25 @@ void gameBoard::restart() {
 
 Block * gameBoard::generateBlock() {
 	switch(level) {
-		case 0:
+		case 0: {
 			//read the next one from file...do we need a counter in the meantime
-			return new iBlock(this);
+			char blockType;
+			ifstream file(fileName.c_str());
+			for(int i = 0; i < levelZeroCount; ++i) {
+				file >> blockType;
+			}
+			levelZeroCount++;
+			switch(blockType) {
+				case 'I': { return new iBlock(this); break; }
+				case 'J': { return new jBlock(this); break; }
+				case 'O': { return new oBlock(this); break; }
+				case 'S': { return new sBlock(this); break; }
+				case 'Z': { return new zBlock(this); break; }
+				case 'L': { return new lBlock(this); break; }
+				case 'T': { return new tBlock(this); break; }
+			}
 			break;
+		}
 		case 1: {
 			int i = rand() % 12;
 			switch(i) {
@@ -157,12 +174,12 @@ bool gameBoard::getGraphics() {
 	return isGraphics;
 }
 
-void gameBoard::setLevel(int pLevel) {
-	level = pLevel;
+void gameBoard::setFileName(string pFileName) {
+	fileName = pFileName;
 }
 
-void gameBoard::setLevelZeroFile(std::istream * pFile) {
-	file = pFile;
+void gameBoard::setLevel(int pLevel) {
+	level = pLevel;
 }
 
 void gameBoard::calculateScore() {

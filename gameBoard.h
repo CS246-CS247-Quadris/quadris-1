@@ -11,12 +11,13 @@ class gameBoard {
 	Block * currentBlock;
 	Block * nextBlock;
 	int level;
+	int levelZeroCount;
 	int currentScore;
 	int hiScore;
 	//Xwindow * xw;
 	bool isGraphics;
 	double seed;
-	std::istream * file;
+	std::string fileName;
 
 	Block * generateBlock();
 	void preMove();
@@ -26,7 +27,8 @@ class gameBoard {
 		~gameBoard();
 		void setSeed(int pSeed);
 		void setLevel(int pLevel);
-		void setLevelZeroFile(std::istream * pFile);
+		void setFileName(std::string pFileName);
+		//void newGame();
 		Cell * getCell(int x, int y);
 		//Block getCurrentBlock();
 		//Block getNextBlock();
