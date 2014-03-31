@@ -3,16 +3,13 @@
 #include "block.h"
 
 class iBlock : public Block {
-  bool rotateable(int x,int y);
  public:
   iBlock(gameBoard * pBoard);
-  iBlock &operator= (const iBlock &rhs);
   ~iBlock();
   virtual void rotateCCW();
   virtual void rotateCW();
   virtual void left();
   virtual void right();
   virtual void down();
-  virtual bool isLegalRotate(int pDirection); //0 - clockwise, 1 - counterclockwise
 };
 #endif

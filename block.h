@@ -21,7 +21,7 @@ class Block {
   virtual void down() = 0;
   friend std::ostream &operator<<(std::ostream &out, const Block &bl);
   bool isLegalMove(int pX, int pY);
-  virtual bool isLegalRotate(int pDirection) = 0; //0 - clockwise, 1 - counterclockwise
+  bool isLegalXY(int x, int y);
  protected:
   gameBoard * board;
   std::vector<Cell *> cells;

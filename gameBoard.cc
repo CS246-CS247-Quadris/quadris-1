@@ -203,38 +203,26 @@ void gameBoard::postMove() {
 
 void gameBoard::left() {
 	this->preMove();
-	bool legal = currentBlock->isLegalMove(0,-1);
-	if(legal) {
-		cout << "it is legal" << endl;
+	if(currentBlock->isLegalMove(0,-1)) {
 		currentBlock->left();
-	} else {
-		cout << "it is not legal" << endl;
 	}
 	this->postMove();
 }
 
 void gameBoard::right() {
 	this->preMove();
-	bool legal = currentBlock->isLegalMove(0,1);
-	if(legal) {
-		cout << "it is legal" << endl;
+	if(currentBlock->isLegalMove(0,1)) {
 		currentBlock->right();
-	} else {
-		cout << "it is not legal" << endl;
 	}
 	this->postMove();
 }
 
 void gameBoard::down() {
-	bool legal = currentBlock->isLegalMove(1,0);
-	if(legal) {
-		cout << "it is legal" << endl;
-		this->preMove();
+	this->preMove();
+	if(currentBlock->isLegalMove(1,0)) {
 		currentBlock->down();
-		this->postMove();
-	} else {
-		cout << "it is not legal" << endl;
 	}
+	this->postMove();
 }
 
 void gameBoard::drop() {
@@ -253,25 +241,13 @@ void gameBoard::drop() {
 
 void gameBoard::rotateCW() {
 	this->preMove();
-	//bool legal = currentBlock->isLegalRotate(0);
-	//if(legal) {
-	//	cout << "it is legal" << endl;
-		currentBlock->rotateCW();
-	//} else {
-	//	cout << "it is not legal" << endl;
-	//}
+	currentBlock->rotateCW();
 	this->postMove();
 }
 
 void gameBoard::rotateCCW() {
 	this->preMove();
-	bool legal = currentBlock->isLegalRotate(1);
-	if(legal) {
-		cout << "it is legal" << endl;
-		currentBlock->rotateCCW();
-	} else {
-		cout << "it is not legal" << endl;
-	}
+	currentBlock->rotateCCW();
 	this->postMove();
 }
 

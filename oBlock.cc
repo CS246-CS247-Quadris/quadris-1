@@ -10,9 +10,11 @@ oBlock::oBlock(gameBoard * pBoard):Block(pBoard) {
 oBlock::~oBlock() {}
 
 void oBlock::rotateCCW() {
+	std::cout << "it is legal" << std::endl;
 }
 
 void oBlock::rotateCW() {
+	std::cout << "it is legal" << std::endl;
 }
 
 void oBlock::left(){
@@ -39,5 +41,3 @@ void oBlock::down(){
 	cells.at(3)->setXY(cells.at(3)->x+1,cells.at(3)->y);
 
 }
-
-bool oBlock::isLegalRotate(int pDirection) { return true;}

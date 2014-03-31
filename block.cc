@@ -31,12 +31,18 @@ bool Block::isLegalMove(int pX, int pY) {
 	for(int i = 0; i < 4; ++i) {
 		int tmpX = cells.at(i)->x+pX;
 		int tmpY = cells.at(i)->y+pY;
-		if(tmpX < 0 || tmpX > (NUM_ROWS-1) || tmpY < 0 || tmpY > (NUM_COLS-1)) {
+		if(!isLegalXY(tmpX,tmpY)) {
+			cout << "it is not legal" << endl;
 			return false;
 		}
-		if(board->getCell(tmpX,tmpY)->filled) {
-			return false;			
-		}
+	}
+	cout << "it is legal" << endl;
+	return true;
+}
+
+bool Block::isLegalXY(int x, int y) {
+	if(x < 0 || x > (NUM_ROWS-1) || y < 0 || y > (NUM_COLS-1) || board->getCell(x,y)->filled){ 
+		return false;
 	}
 	return true;
 }
