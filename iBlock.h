@@ -3,7 +3,7 @@
 #include "block.h"
 
 class iBlock : public Block {
-
+  bool rotateable(int x,int y);
  public:
   iBlock(gameBoard * pBoard);
   iBlock &operator= (const iBlock &rhs);

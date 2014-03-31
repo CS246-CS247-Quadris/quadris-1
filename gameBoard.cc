@@ -89,7 +89,7 @@ Block * gameBoard::generateBlock() {
 	switch(level) {
 		case 0:
 			//read the next one from file...do we need a counter in the meantime
-			return new tBlock(this);
+			return new iBlock(this);
 			break;
 		case 1: {
 			int i = rand() % 12;
@@ -253,13 +253,13 @@ void gameBoard::drop() {
 
 void gameBoard::rotateCW() {
 	this->preMove();
-	bool legal = currentBlock->isLegalRotate(0);
-	if(legal) {
-		cout << "it is legal" << endl;
+	//bool legal = currentBlock->isLegalRotate(0);
+	//if(legal) {
+	//	cout << "it is legal" << endl;
 		currentBlock->rotateCW();
-	} else {
-		cout << "it is not legal" << endl;
-	}
+	//} else {
+	//	cout << "it is not legal" << endl;
+	//}
 	this->postMove();
 }
 

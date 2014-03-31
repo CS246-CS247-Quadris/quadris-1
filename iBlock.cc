@@ -19,11 +19,14 @@ void iBlock::rotateCCW() {
 
 void iBlock::rotateCW() {
   if(cells.at(0)->x != cells.at(3)->x) {
+	if(rotateable(cells.at(0)->x,cells.at(0)->y)and rotateable(cells.at(1)->x+1,cells.at(1)->y+1) and rotateable(cells.at(2)->x+2,cells.at(2)->y+2) and rotateable(cells.at(3)->x+3,cells.at(3)->y+3)){
 	cells.at(0)->setXY(cells.at(0)->x,cells.at(0)->y);
 	cells.at(1)->setXY(cells.at(1)->x+1,cells.at(1)->y+1);
 	cells.at(2)->setXY(cells.at(2)->x+2,cells.at(2)->y+2);
 	cells.at(3)->setXY(cells.at(3)->x+3,cells.at(3)->y+3);
+	}
   } else {
+	if(rotateable(cells.at(0)->x,cells.at(0)->y)and rotateable(cells.at(1)->x-1,cells.at(1)->y-1) and rotateable(cells.at(2)->x-2,cells.at(2)->y-2) and rotateable(cells.at(3)->x-3,cells.at(3)->y-3))
 	cells.at(0)->setXY(cells.at(0)->x,cells.at(0)->y);
 	cells.at(1)->setXY(cells.at(1)->x-1,cells.at(1)->y-1);
 	cells.at(2)->setXY(cells.at(2)->x-2,cells.at(2)->y-2);
@@ -50,6 +53,16 @@ void iBlock::down(){
 	cells.at(1)->setXY(cells.at(1)->x+1,cells.at(1)->y);
 	cells.at(2)->setXY(cells.at(2)->x+1,cells.at(2)->y);
 	cells.at(3)->setXY(cells.at(3)->x+1,cells.at(3)->y);
+}
+
+bool iBlock::rotateable(int x, int y){
+bool rotatable = true;
+if(x < 0 || x > (NUM_ROWS-1) || y < 0 || y > (NUM_COLS-1) || board->getCell(x,y)->filled){ 
+	std::cout<<"rotatable not"<<std::endl;
+	rotatable = false;
+}
+
+return rotatable;
 }
 
 bool iBlock::isLegalRotate(int pDirection) {
