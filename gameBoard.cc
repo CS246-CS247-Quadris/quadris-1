@@ -182,8 +182,49 @@ void gameBoard::setLevel(int pLevel) {
 	level = pLevel;
 }
 
-void gameBoard::calculateScore() {
+int gameBoard::getLevel() {
+	return level;
+}
 
+void gameBoard::calculateScore() {
+	int numLinesCleared = 0;
+	for(int i = 0; i < NUM_ROWS-3; ++i) {
+		bool fullLine = true;
+		for(int j = 0; j < NUM_COLS && fullLine; ++j) {
+			if(getCell(i,j)->block_type == ' ') {
+				fullLine = false;
+			}
+		}
+		if(fullLine) {
+			//go through each cell in the line and see if any neighbouring cells have the same unique ID
+			//if so, no points for block clear
+			for(int j = 0; j < NUM_COLS; ++j) {
+				if(checkNeighbourId(i,j)) {
+					currentScore += (getCell(i,j)->levelCreated + 1)^2;
+				}
+			}
+			remove(i);
+			numLinesCleared++;
+		}
+	}
+	currentScore += (level+numLinesCleared)^2;
+}
+
+bool gameBoard::checkNeighbourId(int x, int y) {
+	int id = getCell(x,y)->block_id;
+	if(x+1 < NUM_ROWS-3) {
+		if(getCell(x+1,y)->block_id == id) return false;
+	}
+	if(x-1 >= 0) {
+		if(getCell(x-1,y)->block_id == id) return false;
+	}
+	if(y+1 < NUM_COLS) {
+		if(getCell(x,y+1)->block_id == id) return false;
+	}
+	if(y-1 >= 0) {
+		if(getCell(x,y-1)->block_id == id) return false;
+	}
+	return true;
 }
 
 void gameBoard::remove(int row) {

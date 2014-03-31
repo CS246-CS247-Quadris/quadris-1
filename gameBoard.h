@@ -24,11 +24,13 @@ class gameBoard {
 	Block * generateBlock();
 	void preMove();
 	void postMove();
+	bool checkNeighbourId(int x, int y);
 	public:
 		gameBoard();
 		~gameBoard();
 		void setSeed(int pSeed);
 		void setLevel(int pLevel);
+		int getLevel();
 		void setFileName(std::string pFileName);
 		Cell * getCell(int x, int y);
 		void setGraphics();

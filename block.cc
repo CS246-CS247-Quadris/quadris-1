@@ -9,7 +9,7 @@ using namespace std;
 
 Block::Block(gameBoard * pBoard) {
 		board = pBoard;
-        current_level = 0;
+        current_level = pBoard->getLevel();
         current_block_id = 0;
 }
 
