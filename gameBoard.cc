@@ -23,7 +23,7 @@ gameBoard::gameBoard() {
 	currentScore = 0;
 	hiScore = 0;
 	isGraphics = false;
-	seed = 0;
+	srand(0);
 	fileName = "sequence.txt";
 	
 	//xw = new XWindow();
@@ -163,7 +163,7 @@ Block * gameBoard::generateBlock() {
 }
 
 void gameBoard::setSeed(int pSeed) {
-	seed = pSeed;
+	srand(pSeed);
 }
 
 void gameBoard::setGraphics() {

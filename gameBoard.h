@@ -16,7 +16,6 @@ class gameBoard {
 	int hiScore;
 	//Xwindow * xw;
 	bool isGraphics;
-	double seed;
 	std::string fileName;
 
 	Block * generateBlock();
@@ -28,10 +27,7 @@ class gameBoard {
 		void setSeed(int pSeed);
 		void setLevel(int pLevel);
 		void setFileName(std::string pFileName);
-		//void newGame();
 		Cell * getCell(int x, int y);
-		//Block getCurrentBlock();
-		//Block getNextBlock();
 		void setGraphics();
 		bool getGraphics();
 		void calculateScore();
