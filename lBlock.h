@@ -11,7 +11,6 @@ class lBlock : public Block {
   virtual void rotateCW();
   virtual void left();
   virtual void right();
-  virtual void down();
-	
+  virtual void down();	
 };
 #endif

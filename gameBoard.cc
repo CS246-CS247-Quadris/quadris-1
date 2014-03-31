@@ -13,7 +13,6 @@
 #include "lBlock.h"
 #include "tBlock.h"
 
-
 using namespace std;
 
 gameBoard::gameBoard() {
@@ -95,49 +94,49 @@ Block * gameBoard::generateBlock() {
 			int i = rand() % 12;
 			switch(i) {
 				case 0:
-					//return new sBlock(this);
+					return new sBlock(this);
 					break;
 				case 1:
-					//return new zBlock(this);
+					return new zBlock(this);
 					break;
 				default:
 					int j = rand() % 5;
 					if(j == 0) { return new iBlock(this); }
-					// if(j == 1) { return new jBlock(this); }
-					// if(j == 2) { return new lBlock(this); }
-					// if(j == 3) { return new oBlock(this); }
-					// if(j == 4) { return new tBlock(this); }
+					if(j == 1) { return new jBlock(this); }
+					if(j == 2) { return new lBlock(this); }
+					if(j == 3) { return new oBlock(this); }
+					if(j == 4) { return new tBlock(this); }
 				break;
 			}
 			break;
 		}
 		case 2: {
 			int i = rand() % 7;
-			// if(i == 0) { return new iBlock(this); }
-			// if(i == 1) { return new jBlock(this); }
-			// if(i == 2) { return new lBlock(this); }
-			// if(i == 3) { return new oBlock(this); }
-			// if(i == 4) { return new sBlock(this); }
-			// if(i == 5) { return new zBlock(this); }
-			// if(i == 6) { return new tBlock(this); }
+			if(i == 0) { return new iBlock(this); }
+			if(i == 1) { return new jBlock(this); }
+			if(i == 2) { return new lBlock(this); }
+			if(i == 3) { return new oBlock(this); }
+			if(i == 4) { return new sBlock(this); }
+			if(i == 5) { return new zBlock(this); }
+			if(i == 6) { return new tBlock(this); }
 			break;
 		}
 		case 3: {
 			int i = rand() % 9;
 			switch(i) {
 				case 0: case 1:
-					//return new sBlock(this);
+					return new sBlock(this);
 					break;
 				case 2: case 3:
-					//return new zBlock(this);
+					return new zBlock(this);
 					break;
 				default:
 					int j = rand() % 5;
 					if(j == 0) { return new iBlock(this); }
-					// if(j == 1) { return new jBlock(this); }
-					// if(j == 2) { return new lBlock(this); }
-					// if(j == 3) { return new oBlock(this); }
-					// if(j == 4) { return new tBlock(this); }
+					if(j == 1) { return new jBlock(this); }
+					if(j == 2) { return new lBlock(this); }
+					if(j == 3) { return new oBlock(this); }
+					if(j == 4) { return new tBlock(this); }
 					break;
 			}
 			break;

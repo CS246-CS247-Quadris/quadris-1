@@ -11,8 +11,6 @@ class sBlock : public Block {
   virtual void rotateCW();
   virtual void left();
   virtual void right();
-  virtual void down();
-  virtual bool isLegalRotate(int pDirection); //0 - clockwise, 1 - counterclockwise
-	
+  virtual void down();	
 };
 #endif
