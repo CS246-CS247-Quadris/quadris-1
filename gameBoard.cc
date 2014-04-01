@@ -220,6 +220,7 @@ void gameBoard::calculateScore() {
 			//but it doesn't work right now
 			for(int j = 0; j < NUM_COLS; ++j) {
 				if(checkNeighbourId(i-numLinesCleared,j)) {
+					cout << "cOMPLETE BLOCK DELETED " << getCell(i-numLinesCleared,j)->levelCreated <<endl;
 					currentScore += (getCell(i-numLinesCleared,j)->levelCreated + 1)^2;
 				}
 			}
@@ -227,7 +228,12 @@ void gameBoard::calculateScore() {
 			numLinesCleared++;
 		}
 	}
-	if(numLinesCleared != 0) { currentScore += (level+numLinesCleared)^2; }
+	if(numLinesCleared != 0) { 
+		int added_score = (level+numLinesCleared)*(level+numLinesCleared);
+		//cout << "INSIDESSCORE " << currentScore <<" ADDING"<<sdfs<<endl;
+		currentScore += added_score; 
+	}
+		//cout << "cscooore " << currentScore << "num Lines cleared " << numLinesCleared << "whats the leveeel"<< level<<endl;
 }
 
 void gameBoard::remove(int row) {
@@ -308,7 +314,7 @@ void gameBoard::drop() {
 		currentBlock->down();
 	}
 	this->postMove();
-	//calculateScore();
+	calculateScore();
 
 	//point to a new block
 	delete currentBlock;
