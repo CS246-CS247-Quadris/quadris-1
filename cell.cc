@@ -16,6 +16,7 @@ void Cell::setXY(int pX, int pY) {
 	x = pX;
 	y = pY;
 }
+
 Cell::~Cell(){}
 
 std::ostream &operator<<(std::ostream &out, const Cell &c) {

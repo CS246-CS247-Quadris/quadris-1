@@ -198,7 +198,26 @@ int gameBoard::getLevel() {
 }
 
 bool gameBoard::checkNeighbourId(int x, int y) {
+	cout << "checkneighbor1" <<endl;
 	int id = getCell(x,y)->block_id;
+	bool no_neighbour = true;
+	for(int i = -3; i <=3 ; ++i){
+			for(int j = -3; j <=3; ++j){
+				
+				if(x+i < NUM_ROWS-3 and x+i >= 0 and y+j < NUM_COLS and y+j >= 0 and (x+i !=0 and y+j != 0)){
+					cout << "nieght "<<(x+i)<<"  "<<(y+j) <<endl;
+					if(getCell(x+i,y+j)->block_id == id and id >=0){
+						//cout << "nieght "<<(x+i)<<"  "<<(y+j) <<endl;
+						no_neighbour = false;
+					}
+				}
+			
+		}
+
+	}
+
+	return no_neighbour;
+/*
 	if(x+1 < NUM_ROWS-3) {
 		if(getCell(x+1,y)->block_id == id) return false;
 	}
@@ -211,14 +230,16 @@ bool gameBoard::checkNeighbourId(int x, int y) {
 	if(y-1 >= 0) {
 		if(getCell(x,y-1)->block_id == id) return false;
 	}
-	return true;
+	return true;*/
 }
 
 void gameBoard::calculateScore() {
+	cout << "calcualte scorreee" <<endl;
 	int numLinesCleared = 0;
 	for(int i = NUM_ROWS-1; i > 3; --i) {
 		bool fullLine = true;
 		for(int j = 0; j < NUM_COLS && fullLine; ++j) {
+		cout << "what are the IDs " << getCell(i,j)->block_id <<endl;
 			if(getCell(i+numLinesCleared,j)->block_type == ' ') {
 				fullLine = false;
 			}
@@ -228,8 +249,8 @@ void gameBoard::calculateScore() {
 			//if so, no points for block clear
 			//but it doesn't work right now
 			for(int j = 0; j < NUM_COLS; ++j) {
-				if(checkNeighbourId(i-numLinesCleared,j)) {
-					cout << "cOMPLETE BLOCK DELETED " << getCell(i+numLinesCleared,j)->levelCreated <<endl;
+				if(checkNeighbourId(i+numLinesCleared,j)) {
+					cout << "cOMPLETE BLOCK DELETED ID" << getCell(i+numLinesCleared,j)->block_id <<"  Levelcreated: "<<getCell(i+numLinesCleared,j)->levelCreated <<endl;
 					int block_bonus = getCell(i+numLinesCleared,j)->levelCreated + 1;
 					currentScore += block_bonus * block_bonus;
 				}
