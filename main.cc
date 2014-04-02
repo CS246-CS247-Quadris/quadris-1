@@ -8,8 +8,8 @@ using namespace std;
 
 int main(int argc, char * argv[]) {
 
-    string s;
-	gameBoard * board = new gameBoard();
+        string s;
+        gameBoard * board = new gameBoard();
 
 	//do the args stuff
 	for(int i = 0; i < argc; i++) {
@@ -37,11 +37,10 @@ int main(int argc, char * argv[]) {
 			i++;
 		}
 	}
+	board->restart();
 	cout << *board;
-	//generate the current block and next block on the board
-	//blah blah blah
 
-    while(cin >> s) {
+        while(cin >> s) {
 		if(s.length() < 2) {
 			cerr << "invalid command" << endl;
 		} else {
