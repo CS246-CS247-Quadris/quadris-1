@@ -242,7 +242,7 @@ void gameBoard::calculateScore() {
 		//cout << "INSIDESSCORE " << currentScore <<" ADDING"<<sdfs<<endl;
 		currentScore += added_score; 
 	}
-		//cout << "cscooore " << currentScore << "num Lines cleared " << numLinesCleared << "whats the leveeel"<< level<<endl;
+	if(currentScore > hiScore) hiScore = currentScore;	//cout << "cscooore " << currentScore << "num Lines cleared " << numLinesCleared << "whats the leveeel"<< level<<endl;
 }
 
 void gameBoard::remove(int row) {
