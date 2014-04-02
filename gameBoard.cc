@@ -219,7 +219,7 @@ void gameBoard::calculateScore() {
 	for(int i = NUM_ROWS-1; i > 3; --i) {
 		bool fullLine = true;
 		for(int j = 0; j < NUM_COLS && fullLine; ++j) {
-			if(getCell(i-numLinesCleared,j)->block_type == ' ') {
+			if(getCell(i+numLinesCleared,j)->block_type == ' ') {
 				fullLine = false;
 			}
 		}
@@ -229,11 +229,12 @@ void gameBoard::calculateScore() {
 			//but it doesn't work right now
 			for(int j = 0; j < NUM_COLS; ++j) {
 				if(checkNeighbourId(i-numLinesCleared,j)) {
-					cout << "cOMPLETE BLOCK DELETED " << getCell(i-numLinesCleared,j)->levelCreated <<endl;
-					currentScore += (getCell(i-numLinesCleared,j)->levelCreated + 1)^2;
+					cout << "cOMPLETE BLOCK DELETED " << getCell(i+numLinesCleared,j)->levelCreated <<endl;
+					int block_bonus = getCell(i+numLinesCleared,j)->levelCreated + 1;
+					currentScore += block_bonus * block_bonus;
 				}
 			}
-			remove(i-numLinesCleared);
+			remove(i+numLinesCleared);
 			numLinesCleared++;
 		}
 	}
