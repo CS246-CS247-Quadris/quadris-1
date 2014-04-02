@@ -27,6 +27,10 @@ class gameBoard {
 	void preMove();
 	void postMove();
 	bool checkNeighbourId(int x, int y);
+	void calculateScore();
+	void remove(int row);
+	bool isGameOver();
+	bool isLegal();
 	public:
 		gameBoard();
 		~gameBoard();
@@ -37,9 +41,6 @@ class gameBoard {
 		Cell * getCell(int x, int y);
 		void setGraphics();
 		bool getGraphics();
-		void calculateScore();
-		void remove(int row);
-		bool isLegal();
 		void restart();
 		void levelUp();
 		void levelDown();

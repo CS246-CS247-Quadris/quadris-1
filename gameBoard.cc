@@ -263,6 +263,13 @@ void gameBoard::remove(int row) {
 	}
 }
 
+bool gameBoard::isGameOver() {
+	//check if any blocks on the 3rd row, passed the playing area
+	for(int j = 0; j < NUM_COLS; ++j) {
+		if(getCell(2,j)->filled) return true;
+	}
+	return false;
+}
 Cell * gameBoard::getCell(int x, int y) {
 	return board[x][y];
 }
@@ -328,11 +335,16 @@ void gameBoard::drop() {
 	this->postMove();
 	calculateScore();
 
-	//point to a new block
-	delete currentBlock;
-	currentBlock = nextBlock;
-	this->postMove();
-	nextBlock = generateBlock();
+	if(this->isGameOver()) {
+		cout << "GAME OVER" << endl;
+		this->restart();
+	} else {
+		//point to a new block
+		delete currentBlock;
+		currentBlock = nextBlock;
+		this->postMove();
+		nextBlock = generateBlock();
+	}
 }
 
 void gameBoard::rotateCW() {
