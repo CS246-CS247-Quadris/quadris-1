@@ -240,9 +240,12 @@ void gameBoard::remove(int row) {
 	//delete the row of choice
 	//move all the rows down
 	//add a new row at the top
+	
 	for(int i = row; i > 0; --i) {
 		for(int j = 0; j < NUM_COLS; ++j) {
-			delete board[i][j];
+			if(i == row) {
+				delete board[i][j];
+			}
 			board[i][j] = board[i-1][j];
 		}	
 	}
