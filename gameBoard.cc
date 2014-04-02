@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <vector>
 #include <fstream>
+#include <ctime>
 #include "cell.h"
 #include "block.h"
 #include "gameBoard.h"
@@ -24,7 +25,7 @@ gameBoard::gameBoard() {
 	currentScore = 0;
 	hiScore = 0;
 	isGraphics = false;
-	srand(0);
+	srand(time(NULL));
 	fileName = "sequence.txt";
 	
 	//xw = new XWindow();
@@ -73,6 +74,8 @@ void gameBoard::restart() {
 	delete currentBlock;
 	delete nextBlock;
 
+	currentScore = 0;
+	levelZeroCount = 1;
 
 	board = new Cell **[NUM_ROWS];
 	for(int i = 0; i < NUM_ROWS; ++i) {
@@ -82,20 +85,26 @@ void gameBoard::restart() {
 		}
 	}
 
-	//define blocks, but we need to get new ones ASAP
-	currentBlock = NULL;
-	nextBlock = NULL;
+	currentBlock = generateBlock();
+	nextBlock = generateBlock();
+
+	this->postMove();
 }
 
 Block * gameBoard::generateBlock() {
 	blockCounter++;
 	switch(level) {
 		case 0: {
-			//read the next one from file...do we need a counter in the meantime
 			char blockType;
 			ifstream file(fileName.c_str());
 			for(int i = 0; i < levelZeroCount; ++i) {
 				file >> blockType;
+				if(file.eof()) {
+					file.clear();
+					file.seekg(0, file.beg);
+					file >> blockType;
+					levelZeroCount = 1;
+				}
 			}
 			levelZeroCount++;
 			switch(blockType) {
