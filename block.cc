@@ -39,6 +39,14 @@ bool Block::isLegalMove(int pX, int pY) {
 	return true;
 }
 
+void Block::move_ID(int i,int x_new, int y_new){
+	
+	int ID_temp = cells.at(i)->block_id;
+	cells.at(i)->block_id = -1;
+	cells.at(i)->setXY(x_new,y_new);
+	cells.at(i)->block_id = ID_temp;
+}
+
 bool Block::isLegalXY(int x, int y) {
 	if(x < 0 || x > (NUM_ROWS-1) || y < 0 || y > (NUM_COLS-1) || board->getCell(x,y)->filled){ 
 		return false;
