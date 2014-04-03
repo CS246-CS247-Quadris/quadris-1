@@ -203,10 +203,10 @@ bool gameBoard::checkNeighbourId(int x, int y) {
 	for(int i = -3; i <=3 ; ++i){
 			for(int j = -3; j <=3; ++j){
 				
-				if(x+i < NUM_ROWS-3 and x+i >= 0 and y+j < NUM_COLS and y+j >= 0 and (x+i !=0 and y+j != 0)){
-					//cout << "nieght "<<(x+i)<<"  "<<(y+j) <<endl;
+				if(x+i < NUM_ROWS and x+i > 3 and y+j < NUM_COLS and y+j >= 0 and (i !=0 or j != 0) and x+i != x){
+					//cout << "nieght "<<(x+i)<<"  "<<(y+j) <<"new id  "<<getCell(x+i,y+j)->block_id <<" old_id "<<id<<endl;
 					if(getCell(x+i,y+j)->block_id == id and id >=0){
-						//cout << "nieght "<<(x+i)<<"  "<<(y+j) <<endl;
+						cout << "no nieghbor "<<(x+i)<<"  "<<(y+j) <<endl;
 						no_neighbour = false;
 					}
 				}
