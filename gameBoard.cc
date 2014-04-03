@@ -206,7 +206,7 @@ bool gameBoard::checkNeighbourId(int x, int y) {
 				if(x+i < NUM_ROWS and x+i > 3 and y+j < NUM_COLS and y+j >= 0 and (i !=0 or j != 0) and x+i != x){
 					//cout << "nieght "<<(x+i)<<"  "<<(y+j) <<"new id  "<<getCell(x+i,y+j)->block_id <<" old_id "<<id<<endl;
 					if(getCell(x+i,y+j)->block_id == id and id >=0){
-						cout << "no nieghbor "<<(x+i)<<"  "<<(y+j) <<endl;
+						//cout << "no nieghbor "<<(x+i)<<"  "<<(y+j) <<endl;
 						no_neighbour = false;
 					}
 				}
@@ -233,12 +233,12 @@ bool gameBoard::checkNeighbourId(int x, int y) {
 }
 
 void gameBoard::calculateScore() {
-	cout << "calcualte scorreee" <<endl;
+	//cout << "calcualte scorreee" <<endl;
 	int numLinesCleared = 0;
 	for(int i = NUM_ROWS-1; i > 3; --i) {
 		bool fullLine = true;
 		for(int j = 0; j < NUM_COLS && fullLine; ++j) {
-		cout << "what are the IDs " << getCell(i,j)->block_id <<endl;
+		//cout << "what are the IDs " << getCell(i,j)->block_id <<endl;
 			if(getCell(i+numLinesCleared,j)->block_type == ' ') {
 				fullLine = false;
 			}
@@ -256,7 +256,7 @@ void gameBoard::calculateScore() {
 						}
 					}
 					if(!id_used){
-						cout << "cOMPLETE BLOCK DELETED ID" << getCell(i+numLinesCleared,j)->block_id <<"  Levelcreated: "<<getCell(i+numLinesCleared,j)->levelCreated <<endl;
+						cout << "COMPLETE BLOCK DELETED ID" << getCell(i+numLinesCleared,j)->block_id <<"  Levelcreated: "<<getCell(i+numLinesCleared,j)->levelCreated <<endl;
 						used_ids.push_back(getCell(i+numLinesCleared,j)->block_id);
 						int block_bonus = getCell(i+numLinesCleared,j)->levelCreated + 1;
 						currentScore += block_bonus * block_bonus;
