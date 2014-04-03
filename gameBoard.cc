@@ -52,7 +52,6 @@ gameBoard::~gameBoard(){
 		for(int j = 0; j < NUM_COLS; ++j) {
 			delete board[i][j];
 		}
-		delete board[i];
 	}
 	delete board;
 	
@@ -62,27 +61,22 @@ gameBoard::~gameBoard(){
 }
 
 void gameBoard::restart() {
+	cout << "deleting" << endl;
 	for(int i = 0; i < NUM_ROWS; ++i) {
 		for(int j = 0; j < NUM_COLS; ++j) {
 			delete board[i][j];
+			board[i][j] = new Cell(i,j);
 		}
-		delete board[i];
+		//delete board[i];
+		cout << "deleted row " << i << endl;
 	}
-	delete board;
-	
-	delete currentBlock;
+	cout << "deleted board cells" << endl;
+	//delete currentBlock;
 	delete nextBlock;
+	//delete board;
 
 	currentScore = 0;
 	levelZeroCount = 1;
-
-	board = new Cell **[NUM_ROWS];
-	for(int i = 0; i < NUM_ROWS; ++i) {
-		board[i] = new Cell * [NUM_COLS];
-		for(int j = 0; j < NUM_COLS; j++) {
-			board[i][j] = new Cell(i,j);
-		}
-	}
 
 	currentBlock = generateBlock();
 	nextBlock = generateBlock();
@@ -216,20 +210,6 @@ bool gameBoard::checkNeighbourId(int x, int y) {
 	}
 
 	return no_neighbour;
-/*
-	if(x+1 < NUM_ROWS-3) {
-		if(getCell(x+1,y)->block_id == id) return false;
-	}
-	if(x-1 >= 0) {
-		if(getCell(x-1,y)->block_id == id) return false;
-	}
-	if(y+1 < NUM_COLS) {
-		if(getCell(x,y+1)->block_id == id) return false;
-	}
-	if(y-1 >= 0) {
-		if(getCell(x,y-1)->block_id == id) return false;
-	}
-	return true;*/
 }
 
 void gameBoard::calculateScore() {
@@ -362,6 +342,7 @@ void gameBoard::drop() {
 	if(this->isGameOver()) {
 		cout << "GAME OVER" << endl;
 		this->restart();
+		cout << "asdsadasd" << endl;
 	} else {
 		//point to a new block
 		delete currentBlock;
