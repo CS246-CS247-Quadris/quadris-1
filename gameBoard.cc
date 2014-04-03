@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include <vector>
 #include <fstream>
 #include <ctime>
 #include "cell.h"
@@ -198,14 +197,14 @@ int gameBoard::getLevel() {
 }
 
 bool gameBoard::checkNeighbourId(int x, int y) {
-	cout << "checkneighbor1" <<endl;
+	//cout << "checkneighbor1" <<endl;
 	int id = getCell(x,y)->block_id;
 	bool no_neighbour = true;
 	for(int i = -3; i <=3 ; ++i){
 			for(int j = -3; j <=3; ++j){
 				
 				if(x+i < NUM_ROWS-3 and x+i >= 0 and y+j < NUM_COLS and y+j >= 0 and (x+i !=0 and y+j != 0)){
-					cout << "nieght "<<(x+i)<<"  "<<(y+j) <<endl;
+					//cout << "nieght "<<(x+i)<<"  "<<(y+j) <<endl;
 					if(getCell(x+i,y+j)->block_id == id and id >=0){
 						//cout << "nieght "<<(x+i)<<"  "<<(y+j) <<endl;
 						no_neighbour = false;
@@ -250,9 +249,18 @@ void gameBoard::calculateScore() {
 			//but it doesn't work right now
 			for(int j = 0; j < NUM_COLS; ++j) {
 				if(checkNeighbourId(i+numLinesCleared,j)) {
-					cout << "cOMPLETE BLOCK DELETED ID" << getCell(i+numLinesCleared,j)->block_id <<"  Levelcreated: "<<getCell(i+numLinesCleared,j)->levelCreated <<endl;
-					int block_bonus = getCell(i+numLinesCleared,j)->levelCreated + 1;
-					currentScore += block_bonus * block_bonus;
+					bool id_used = false;
+					for (vector<int>::iterator it = used_ids.begin() ; it != used_ids.end(); ++it) {
+						if((*it) == getCell(i+numLinesCleared,j)->block_id){
+							id_used = true;
+						}
+					}
+					if(!id_used){
+						cout << "cOMPLETE BLOCK DELETED ID" << getCell(i+numLinesCleared,j)->block_id <<"  Levelcreated: "<<getCell(i+numLinesCleared,j)->levelCreated <<endl;
+						used_ids.push_back(getCell(i+numLinesCleared,j)->block_id);
+						int block_bonus = getCell(i+numLinesCleared,j)->levelCreated + 1;
+						currentScore += block_bonus * block_bonus;
+					}
 				}
 			}
 			remove(i+numLinesCleared);

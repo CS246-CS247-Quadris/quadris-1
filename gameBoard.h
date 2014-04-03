@@ -1,6 +1,6 @@
 #ifndef __GAMEBOARD_H__
 #define __GAMEBOARD_H__
-
+#include <vector>
 #include <iostream>
 #include <string>
 #define NUM_ROWS 18
@@ -22,7 +22,7 @@ class gameBoard {
 	//Xwindow * xw;
 	bool isGraphics;
 	std::string fileName;
-
+	std::vector<int> used_ids;
 	Block * generateBlock();
 	void preMove();
 	void postMove();

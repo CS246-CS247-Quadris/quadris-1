@@ -24,6 +24,7 @@ class Block {
  protected:
   gameBoard * board;
   std::vector<Cell *> cells;
+  void move_ID(int,int, int);
   char block_type;
   int current_level;
 };

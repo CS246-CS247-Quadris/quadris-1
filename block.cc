@@ -42,7 +42,7 @@ bool Block::isLegalMove(int pX, int pY) {
 void Block::left() {
 	if(this->isLegalMove(0,-1)) {
 		for (int i = 0; i < 4; ++i) {
-			cells.at(i)->setXY(cells.at(i)->x,cells.at(i)->y-1);
+			move_ID(i,cells.at(i)->x,cells.at(i)->y-1);
 		}
 	}
 }
@@ -50,7 +50,7 @@ void Block::left() {
 void Block::right() {
 	if(this->isLegalMove(0,1)) {
 		for (int i = 0; i < 4; ++i) {
-			cells.at(i)->setXY(cells.at(i)->x,cells.at(i)->y+1);
+			move_ID(i,cells.at(i)->x,cells.at(i)->y+1);
 		}
 	}
 }
@@ -58,9 +58,17 @@ void Block::right() {
 void Block::down() {
 	if(this->isLegalMove(1,0)) {
 		for (int i = 0; i < 4; ++i) {
-			cells.at(i)->setXY(cells.at(i)->x+1,cells.at(i)->y);
+			move_ID(i,cells.at(i)->x+1,cells.at(i)->y);
 		}
 	}
+}
+
+void Block::move_ID(int i,int x_new, int y_new){
+	
+	int ID_temp = cells.at(i)->block_id;
+	cells.at(i)->block_id = -1;
+	cells.at(i)->setXY(x_new,y_new);
+	cells.at(i)->block_id = ID_temp;
 }
 
 bool Block::isLegalXY(int x, int y) {
