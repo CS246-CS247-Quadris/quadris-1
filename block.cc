@@ -39,6 +39,30 @@ bool Block::isLegalMove(int pX, int pY) {
 	return true;
 }
 
+void Block::left() {
+	if(this->isLegalMove(0,-1)) {
+		for (int i = 0; i < 4; ++i) {
+			cells.at(i)->setXY(cells.at(i)->x,cells.at(i)->y-1);
+		}
+	}
+}
+
+void Block::right() {
+	if(this->isLegalMove(0,1)) {
+		for (int i = 0; i < 4; ++i) {
+			cells.at(i)->setXY(cells.at(i)->x,cells.at(i)->y+1);
+		}
+	}
+}
+
+void Block::down() {
+	if(this->isLegalMove(1,0)) {
+		for (int i = 0; i < 4; ++i) {
+			cells.at(i)->setXY(cells.at(i)->x+1,cells.at(i)->y);
+		}
+	}
+}
+
 bool Block::isLegalXY(int x, int y) {
 	if(x < 0 || x > (NUM_ROWS-1) || y < 0 || y > (NUM_COLS-1) || board->getCell(x,y)->filled){ 
 		return false;

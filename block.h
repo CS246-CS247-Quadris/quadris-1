@@ -15,9 +15,9 @@ class Block {
   char getBlockType();
   virtual void rotateCCW()= 0;
   virtual void rotateCW()= 0;
-  virtual void left() = 0;
-  virtual void right() = 0;
-  virtual void down() = 0;
+  void left();
+  void right();
+  void down();
   friend std::ostream &operator<<(std::ostream &out, const Block &bl);
   bool isLegalMove(int pX, int pY);
   bool isLegalXY(int x, int y);

@@ -9,8 +9,5 @@ class lBlock : public Block {
   ~lBlock();
   virtual void rotateCCW();
   virtual void rotateCW();
-  virtual void left();
-  virtual void right();
-  virtual void down();	
 };
 #endif

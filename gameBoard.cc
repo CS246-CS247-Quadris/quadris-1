@@ -321,25 +321,19 @@ void gameBoard::postMove() {
 
 void gameBoard::left() {
 	this->preMove();
-	if(currentBlock->isLegalMove(0,-1)) {
-		currentBlock->left();
-	}
+	currentBlock->left();
 	this->postMove();
 }
 
 void gameBoard::right() {
 	this->preMove();
-	if(currentBlock->isLegalMove(0,1)) {
-		currentBlock->right();
-	}
+	currentBlock->right();
 	this->postMove();
 }
 
 void gameBoard::down() {
 	this->preMove();
-	if(currentBlock->isLegalMove(1,0)) {
-		currentBlock->down();
-	}
+	currentBlock->down();
 	this->postMove();
 }
 
