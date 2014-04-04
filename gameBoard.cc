@@ -2,6 +2,7 @@
 #include <string>
 #include <cstdlib>
 #include <fstream>
+#include <sstream>
 #include <ctime>
 #include "cell.h"
 #include "block.h"
@@ -380,15 +381,18 @@ void gameBoard::initGameBoardGraphics(){
 
 void gameBoard::textGraphics(){
 
-std::string msg1 = "Level:    " + level;
+	xw->fillRectangle(300,100,200,200,Xwindow::White);
+	stringstream ssLevel;
+	stringstream ssCurrentScore;
+	stringstream ssHiScore;
+	ssLevel << "Level:    " << level;
+	ssCurrentScore << "Score:    " << currentScore;
+	ssHiScore << "Hi Score:    " << hiScore;
 
-std::string msg2 = "Score:    " + currentScore;
-
-std::string msg3 = "Hi Score:    " + hiScore;
-
-xw->drawString(300, 100, msg1);
-xw->drawString(300, 150, msg2);
-xw->drawString(300, 200, msg3);
+	//cout << msg1 << "||" << msg2 << "||" << msg3 << endl;
+	xw->drawString(300, 100, ssLevel.str());
+	xw->drawString(300, 150, ssCurrentScore.str());
+	xw->drawString(300, 200, ssHiScore.str());
 
 }
 
