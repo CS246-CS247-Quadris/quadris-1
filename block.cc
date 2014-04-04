@@ -78,9 +78,43 @@ bool Block::isLegalXY(int x, int y) {
 	return true;
 }
 
-ostream &operator<<(ostream &out, const Block &bl) {
+void Block::drawNextBlock(std::string nblock, int j) {
+
+		
+	int width = 25;
+	int height = 25;
+	for(int i = 0; i < nblock.size();i++){
+
+	if(nblock[i] == ' '){
+		w->fillRectangle(300 + i*25,300 + j*25,width,height,Xwindow::White);
+	}else if(nblock[i] == 'I'){
+		w->fillRectangle(300 + i*25,300 + j*25,width,height,Xwindow::Red);
+	}else if(nblock[i] == 'J'){
+		w->fillRectangle(300 + i*25,300 + j*25,width,height,Xwindow::Green);
+	}else if(nblock[i] == 'L'){
+		w->fillRectangle(300 + i*25,300 + j*25,width,height,Xwindow::Blue);
+	}else if(nblock[i] == 'O'){
+		w->fillRectangle(300 + i*25,300 + j*25,width,height,Xwindow::Cyan);
+	}else if(nblock[i] == 'Z'){
+		w->fillRectangle(300 + i*25,300 + j*25,width,height,Xwindow::Yellow);
+	}else if(nblock[i] == 'S'){
+		w->fillRectangle(300 + i*25,300 + j*25,width,height,Xwindow::Magenta);
+	}else if(nblock[i] == 'T'){
+		w->fillRectangle(300 + i*25,300 + j*25,width,height,Xwindow::Orange);
+	}
+	}
+
+
+}
+
+ostream &operator<<(ostream &out, Block &bl) {
 	
 	int c = 0;
+	int temp = 0;
+	if(bl.board->getGraphics()) {
+			bl.w = bl.board->getWindow();
+			bl.w->fillRectangle(280,280,200,200,Xwindow::White);
+	}
 	stringstream ss;
 	for(int i = 0; i < 4 && c < 4; ++i) {
 		for(int j = 0; j < 4 && c < 4; ++j) {
@@ -96,7 +130,13 @@ ostream &operator<<(ostream &out, const Block &bl) {
 		if(ss.str().find_first_not_of(' ') != std::string::npos) {
 			out << ss.str() << endl;
 		}
+		if(bl.board->getGraphics()) {
+			bl.drawNextBlock(ss.str(),temp);
+		}
+		temp++;
+		//
 		ss.str("");
 	}
+	
 	return out;
 }

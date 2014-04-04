@@ -7,18 +7,21 @@
 class gameBoard;
 
 class Block {
+ Xwindow *w;
+
  public:
   Block(gameBoard * pBoard);
   ~Block();
   void setLevel(int);
   std::vector<Cell *> getCells();
   char getBlockType();
+  void drawNextBlock(std::string, int);
   virtual void rotateCCW()= 0;
   virtual void rotateCW()= 0;
   void left();
   void right();
   void down();
-  friend std::ostream &operator<<(std::ostream &out, const Block &bl);
+  friend std::ostream &operator<<(std::ostream &out,Block &bl);
   bool isLegalMove(int pX, int pY);	//check for left,right,down moves based on distance traveling
   bool isLegalXY(int x, int y);		//check if a cell is filled or off the board
  protected:
