@@ -30,12 +30,12 @@ class gameBoard {
 	bool checkNeighbourId(int x, int y);
 	void calculateScore();
 	void remove(int row);
-	bool isGameOver();
 	bool isLegal();
+	bool isGameOver();
 	void initGameBoardGraphics();
 	void textGraphics();
 	public:
-	
+		bool gameOver;
 		gameBoard();
 		~gameBoard();
 		void setSeed(int pSeed);

@@ -28,9 +28,6 @@ gameBoard::gameBoard() {
 	srand(time(NULL));
 	fileName = "sequence.txt";
 	
-	//xw = new XWindow();
-	//xw = NULL;
-
 	//initialize the board
 	board = new Cell **[NUM_ROWS];
 	for(int i = 0; i < NUM_ROWS; ++i) {
@@ -39,11 +36,6 @@ gameBoard::gameBoard() {
 			board[i][j] = new Cell(i,j);
 		}
 	}
-	if(isGraphics){
-		xw = new Xwindow();
-		initGameBoardGraphics();
-		textGraphics();
-	}
 
 	//define blocks
 	currentBlock = generateBlock();
@@ -51,6 +43,12 @@ gameBoard::gameBoard() {
 
 	//Put the current block in the grid
 	this->postMove();
+
+	if(isGraphics){
+		xw = new Xwindow();
+		initGameBoardGraphics();
+		textGraphics();
+	}
 }
 
 gameBoard::~gameBoard(){
@@ -63,10 +61,11 @@ gameBoard::~gameBoard(){
 	
 	delete currentBlock;
 	delete nextBlock;
-	//delete xw;
+	delete xw;
 }
 
 void gameBoard::restart() {
+	xw->fillRectangle(280,0,200,100,Xwindow::White);
 	for(int i = 0; i < NUM_ROWS; ++i) {
 		for(int j = 0; j < NUM_COLS; ++j) {
 			delete board[i][j];
@@ -82,7 +81,11 @@ void gameBoard::restart() {
 	nextBlock = generateBlock();
 
 	this->postMove();
-	initGameBoardGraphics();
+	if(isGraphics){
+		initGameBoardGraphics();
+		textGraphics();
+	}
+	gameOver = false;
 }
 
 Block * gameBoard::generateBlock() {
@@ -250,8 +253,6 @@ void gameBoard::calculateScore() {
 		currentScore += added_score; 
 	}
 	if(currentScore > hiScore) hiScore = currentScore;
-
-	textGraphics();
 }
 
 void gameBoard::remove(int row) {
@@ -269,26 +270,29 @@ void gameBoard::remove(int row) {
 	for(int j = 0; j < NUM_COLS; ++j) {
 		board[3][j] = new Cell(3,j);
 	}
-	initGameBoardGraphics();
+//	initGameBoardGraphics();
 }
 
 bool gameBoard::isGameOver() {
 	//check if any blocks on the 3rd row, passed the playing area
 	for(int j = 0; j < NUM_COLS; ++j) {
-		if(getCell(2,j)->filled) return true;
+		if(getCell(3,j)->filled) return true;
 	}
 	return false;
 }
+
 Cell * gameBoard::getCell(int x, int y) {
 	return board[x][y];
 }
 
 void gameBoard::levelUp() {
 	level == 3 ? level = 3 : level++;
+	textGraphics();
 }
 
 void gameBoard::levelDown() {
 	level == 0 ? level = 0 : level--;
+	textGraphics();
 }
 
 void gameBoard::preMove() {
@@ -310,21 +314,27 @@ void gameBoard::left() {
 	this->preMove();
 	currentBlock->left();
 	this->postMove();
-	initGameBoardGraphics();
+	if(isGraphics){
+		initGameBoardGraphics();
+	}
 }
 
 void gameBoard::right() {
 	this->preMove();
 	currentBlock->right();
 	this->postMove();
-	initGameBoardGraphics();
+	if(isGraphics){
+		initGameBoardGraphics();
+	}
 }
 
 void gameBoard::down() {
 	this->preMove();
 	currentBlock->down();
 	this->postMove();
-	initGameBoardGraphics();
+	if(isGraphics){
+		initGameBoardGraphics();
+	}
 }
 
 void gameBoard::drop() {
@@ -340,37 +350,44 @@ void gameBoard::drop() {
 	}
 	this->postMove();
 	calculateScore();
+	delete currentBlock;
 
 	if(this->isGameOver()) {
 		//restart the game
+		gameOver = true;
 		cout << "GAME OVER" << endl;
-		this->restart();
+		if(isGraphics) xw->drawBigString(280,50,"GAME OVER",Xwindow::Black);
+		//this->restart();
 	} else {
 		//point to a new block
-		delete currentBlock;
 		currentBlock = nextBlock;
 		this->postMove();
 		nextBlock = generateBlock();
 	}
-	initGameBoardGraphics();
+	if(isGraphics) {
+		textGraphics();
+		initGameBoardGraphics();	
+	}
 }
 
 void gameBoard::rotateCW() {
 	this->preMove();
 	currentBlock->rotateCW();
 	this->postMove();
-	initGameBoardGraphics();
+	if(isGraphics){
+		initGameBoardGraphics();
+	}
 }
 
 void gameBoard::rotateCCW() {
 	this->preMove();
 	currentBlock->rotateCCW();
 	this->postMove();
-initGameBoardGraphics();
+	if(isGraphics){
+		initGameBoardGraphics();
+	}
 }
 void gameBoard::initGameBoardGraphics(){
-
-
 	for(int i = 0; i < NUM_ROWS; ++i) {
 		for(int j = 0; j < NUM_COLS; j++) {
 			board[i][j]->setCoords(j*25,i*25,25,25,xw);
@@ -379,13 +396,13 @@ void gameBoard::initGameBoardGraphics(){
 	}
 }
 
-XWindow* gameBoard::getWindow(){
+Xwindow* gameBoard::getWindow(){
 	return xw;
 }
 
 void gameBoard::textGraphics(){
 
-	xw->fillRectangle(300,100,200,200,Xwindow::White);
+	xw->fillRectangle(300,75,200,200,Xwindow::White);
 	stringstream ssLevel;
 	stringstream ssCurrentScore;
 	stringstream ssHiScore;
@@ -393,11 +410,10 @@ void gameBoard::textGraphics(){
 	ssCurrentScore << "Score:    " << currentScore;
 	ssHiScore << "Hi Score:    " << hiScore;
 
-	//cout << msg1 << "||" << msg2 << "||" << msg3 << endl;
 	xw->drawString(300, 100, ssLevel.str());
 	xw->drawString(300, 150, ssCurrentScore.str());
 	xw->drawString(300, 200, ssHiScore.str());
-
+	xw->drawString(300, 250, "Next: ");
 }
 
 
@@ -420,5 +436,6 @@ ostream &operator<<(ostream &out, const gameBoard &b) {
 	//display next block
 	out << "Next:" << endl;
 	out << *(b.nextBlock);	
+
 	return out;
 }

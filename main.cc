@@ -77,12 +77,18 @@ int main(int argc, char * argv[]) {
 				if(!command.compare("restart")) { (*board).restart(); }
 				else if(!command.compare("levelup")) { for(int i = 0; i < mult; ++i) (*board).levelUp(); }
 				else if(!command.compare("leveldown")) { for(int i = 0; i < mult; ++i) (*board).levelDown(); }
-				else if(!command.compare("left")) { for(int i = 0; i < mult; ++i) (*board).left(); }
-				else if(!command.compare("right")) { for(int i = 0; i < mult; ++i) (*board).right(); }
-				else if(!command.compare("down")) { for(int i = 0; i < mult; ++i) (*board).down(); }
-				else if(!command.compare("drop")) { for(int i = 0; i < mult; ++i) (*board).drop(); }
-				else if(!command.compare("clockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCW(); }
-				else if(!command.compare("counterclockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCCW(); }
+				else {
+					if(!(board->gameOver)) {
+						if(!command.compare("left")) { for(int i = 0; i < mult; ++i) (*board).left(); }
+						else if(!command.compare("right")) { for(int i = 0; i < mult; ++i) (*board).right(); }
+						else if(!command.compare("down")) { for(int i = 0; i < mult; ++i) (*board).down(); }
+						else if(!command.compare("drop")) { for(int i = 0; i < mult; ++i) (*board).drop(); }
+						else if(!command.compare("clockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCW(); }
+						else if(!command.compare("counterclockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCCW(); }
+					} else {
+						cerr << "please restart your game first" << endl;
+					}
+				}
 			}
 			cout << *board;
 		}
