@@ -379,7 +379,7 @@ void gameBoard::initGameBoardGraphics(){
 	}
 }
 
-XWindow* gameBoard::getWindow(){
+Xwindow* gameBoard::getWindow(){
 	return xw;
 }
 
