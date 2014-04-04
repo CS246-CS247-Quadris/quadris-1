@@ -20,6 +20,7 @@ void Cell::setXY(int pX, int pY) {
 Cell::~Cell(){}
 
 std::ostream &operator<<(std::ostream &out, const Cell &c) {
+	//we really only care about blocktype
 	out << c.block_type;
 	return out;
 }

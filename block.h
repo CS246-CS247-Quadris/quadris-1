@@ -19,12 +19,12 @@ class Block {
   void right();
   void down();
   friend std::ostream &operator<<(std::ostream &out, const Block &bl);
-  bool isLegalMove(int pX, int pY);
-  bool isLegalXY(int x, int y);
+  bool isLegalMove(int pX, int pY);	//check for left,right,down moves based on distance traveling
+  bool isLegalXY(int x, int y);		//check if a cell is filled or off the board
  protected:
   gameBoard * board;
   std::vector<Cell *> cells;
-  void move_ID(int,int, int);
+  void move_ID(int,int, int);		//transfer ID, x, and y from cell to cell
   char block_type;
   int current_level;
 };

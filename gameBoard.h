@@ -15,8 +15,8 @@ class gameBoard {
 	Block * currentBlock;
 	Block * nextBlock;
 	int level;
-	int levelZeroCount;
-	int blockCounter;
+	int levelZeroCount; 	//counter for level zero loop
+	int blockCounter;	//counter for block IDs
 	int currentScore;
 	int hiScore;
 	//Xwindow * xw;
@@ -24,8 +24,8 @@ class gameBoard {
 	std::string fileName;
 	std::vector<int> used_ids;
 	Block * generateBlock();
-	void preMove();
-	void postMove();
+	void preMove();		//remove the current block from the board
+	void postMove();	//put the 'new' current block back onto the board
 	bool checkNeighbourId(int x, int y);
 	void calculateScore();
 	void remove(int row);

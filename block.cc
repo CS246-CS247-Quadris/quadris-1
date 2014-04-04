@@ -8,7 +8,7 @@
 using namespace std;
 
 Block::Block(gameBoard * pBoard) {
-		board = pBoard;
+	board = pBoard;
         current_level = pBoard->getLevel();
 }
 
@@ -79,10 +79,12 @@ bool Block::isLegalXY(int x, int y) {
 }
 
 ostream &operator<<(ostream &out, const Block &bl) {
+	
 	int c = 0;
 	stringstream ss;
 	for(int i = 0; i < 4 && c < 4; ++i) {
 		for(int j = 0; j < 4 && c < 4; ++j) {
+			//if the cell is here, put the cell's content instead of a space
 			if(bl.cells.at(c)->x == i && bl.cells.at(c)->y == j) {
 				ss << *bl.cells.at(c);
 				c++;
@@ -90,6 +92,7 @@ ostream &operator<<(ostream &out, const Block &bl) {
 				ss << ' ';
 			}
 		}
+		//if the stringstream only contains spaces, we don't need it
 		if(ss.str().find_first_not_of(' ') != std::string::npos) {
 			out << ss.str() << endl;
 		}

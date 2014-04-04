@@ -37,6 +37,8 @@ int main(int argc, char * argv[]) {
 			i++;
 		}
 	}
+
+	//restart to put new level, file, etc. into effect
 	board->restart();
 	cout << *board;
 
@@ -83,7 +85,6 @@ int main(int argc, char * argv[]) {
 				else if(!command.compare("counterclockwise")) { for(int i = 0; i < mult; ++i) (*board).rotateCCW(); }
 			}
 			cout << *board;
-			//after the move, probably should check if they lose yet
 		}
 	}
 	delete board;

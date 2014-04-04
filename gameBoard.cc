@@ -61,19 +61,13 @@ gameBoard::~gameBoard(){
 }
 
 void gameBoard::restart() {
-	cout << "deleting" << endl;
 	for(int i = 0; i < NUM_ROWS; ++i) {
 		for(int j = 0; j < NUM_COLS; ++j) {
 			delete board[i][j];
 			board[i][j] = new Cell(i,j);
 		}
-		//delete board[i];
-		cout << "deleted row " << i << endl;
 	}
-	cout << "deleted board cells" << endl;
-	//delete currentBlock;
 	delete nextBlock;
-	//delete board;
 
 	currentScore = 0;
 	levelZeroCount = 1;
@@ -92,6 +86,8 @@ Block * gameBoard::generateBlock() {
 			ifstream file(fileName.c_str());
 			for(int i = 0; i < levelZeroCount; ++i) {
 				file >> blockType;
+				
+				//if we reached the end of file, go back to beginning and grab that block
 				if(file.eof()) {
 					file.clear();
 					file.seekg(0, file.beg);
@@ -191,42 +187,33 @@ int gameBoard::getLevel() {
 }
 
 bool gameBoard::checkNeighbourId(int x, int y) {
-	//cout << "checkneighbor1" <<endl;
 	int id = getCell(x,y)->block_id;
 	bool no_neighbour = true;
+	//span a 4 cell area in each direction to see if there are same IDs
 	for(int i = -3; i <=3 ; ++i){
-			for(int j = -3; j <=3; ++j){
-				
-				if(x+i < NUM_ROWS and x+i > 3 and y+j < NUM_COLS and y+j >= 0 and (i !=0 or j != 0) and x+i != x){
-					//cout << "nieght "<<(x+i)<<"  "<<(y+j) <<"new id  "<<getCell(x+i,y+j)->block_id <<" old_id "<<id<<endl;
-					if(getCell(x+i,y+j)->block_id == id and id >=0){
-						//cout << "no nieghbor "<<(x+i)<<"  "<<(y+j) <<endl;
-						no_neighbour = false;
-					}
+		for(int j = -3; j <=3; ++j){
+			if(x+i < NUM_ROWS and x+i > 3 and y+j < NUM_COLS and y+j >= 0 and (i !=0 or j != 0) and x+i != x){
+				if(getCell(x+i,y+j)->block_id == id and id >=0){
+					no_neighbour = false;
 				}
-			
+			}
 		}
-
 	}
-
 	return no_neighbour;
 }
 
 void gameBoard::calculateScore() {
-	//cout << "calcualte scorreee" <<endl;
 	int numLinesCleared = 0;
+	//start looking for full rows from the bottom
 	for(int i = NUM_ROWS-1; i > 3; --i) {
 		bool fullLine = true;
 		for(int j = 0; j < NUM_COLS && fullLine; ++j) {
-		//cout << "what are the IDs " << getCell(i,j)->block_id <<endl;
 			if(getCell(i+numLinesCleared,j)->block_type == ' ') {
 				fullLine = false;
 			}
 		}
 		if(fullLine) {
 			//go through each cell in the line and see if any neighbouring cells have the same unique ID
-			//if so, no points for block clear
-			//but it doesn't work right now
 			for(int j = 0; j < NUM_COLS; ++j) {
 				if(checkNeighbourId(i+numLinesCleared,j)) {
 					bool id_used = false;
@@ -235,6 +222,7 @@ void gameBoard::calculateScore() {
 							id_used = true;
 						}
 					}
+					//add the bonus if no matching IDs were found
 					if(!id_used){
 						cout << "COMPLETE BLOCK DELETED ID" << getCell(i+numLinesCleared,j)->block_id <<"  Levelcreated: "<<getCell(i+numLinesCleared,j)->levelCreated <<endl;
 						used_ids.push_back(getCell(i+numLinesCleared,j)->block_id);
@@ -243,23 +231,24 @@ void gameBoard::calculateScore() {
 					}
 				}
 			}
+			//remove the line right away
+			//that means that i must be relative
 			remove(i+numLinesCleared);
 			numLinesCleared++;
 		}
 	}
+	//only add score if you actually cleared lines
 	if(numLinesCleared != 0) { 
 		int added_score = (level+numLinesCleared)*(level+numLinesCleared);
-		//cout << "INSIDESSCORE " << currentScore <<" ADDING"<<sdfs<<endl;
 		currentScore += added_score; 
 	}
-	if(currentScore > hiScore) hiScore = currentScore;	//cout << "cscooore " << currentScore << "num Lines cleared " << numLinesCleared << "whats the leveeel"<< level<<endl;
+	if(currentScore > hiScore) hiScore = currentScore;
 }
 
 void gameBoard::remove(int row) {
 	//delete the row of choice
 	//move all the rows down
 	//add a new row at the top
-	
 	for(int i = row; i > 0; --i) {
 		for(int j = 0; j < NUM_COLS; ++j) {
 			if(i == row) {
@@ -340,9 +329,9 @@ void gameBoard::drop() {
 	calculateScore();
 
 	if(this->isGameOver()) {
+		//restart the game
 		cout << "GAME OVER" << endl;
 		this->restart();
-		cout << "asdsadasd" << endl;
 	} else {
 		//point to a new block
 		delete currentBlock;
