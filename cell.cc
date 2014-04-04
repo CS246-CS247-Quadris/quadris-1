@@ -42,7 +42,6 @@ void Cell::setCoords(int i, int j, int width, int height) {
 	this->height = height;
 }
 
-
 void Cell::draw() {
 	//std::cout<<"i:  "<< i << "j:  "<< j <<std::endl;
 	if(block_type == ' '){
@@ -51,10 +50,16 @@ void Cell::draw() {
 		w->fillRectangle(i,j,width,height,Xwindow::Red);
 	}else if(block_type == 'J'){
 		w->fillRectangle(i,j,width,height,Xwindow::Green);
-	}else if(block_type == 'O'){
+	}else if(block_type == 'L'){
 		w->fillRectangle(i,j,width,height,Xwindow::Blue);
-	}else{
-		w->fillRectangle(i,j,width,height,Xwindow::White);
+	}else if(block_type == 'O'){
+		w->fillRectangle(i,j,width,height,Xwindow::Cyan);
+	}else if(block_type == 'Z'){
+		w->fillRectangle(i,j,width,height,Xwindow::Yellow);
+	}else if(block_type == 'S'){
+		w->fillRectangle(i,j,width,height,Xwindow::Magenta);
+	}else if(block_type == 'T'){
+		w->fillRectangle(i,j,width,height,Xwindow::Orange);
 	}
 
 }
