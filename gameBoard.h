@@ -35,6 +35,7 @@ class gameBoard {
 	void initGameBoardGraphics();
 	void textGraphics();
 	public:
+	
 		gameBoard();
 		~gameBoard();
 		void setSeed(int pSeed);
@@ -42,6 +43,7 @@ class gameBoard {
 		int getLevel();
 		void setFileName(std::string pFileName);
 		Cell * getCell(int x, int y);
+		Xwindow * getWindow();
 		void setGraphics();
 		bool getGraphics();
 		void restart();

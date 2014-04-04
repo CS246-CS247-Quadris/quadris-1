@@ -34,16 +34,7 @@ void Cell::setCoords(int i, int j, int width, int height, Xwindow *w) {
 	this->w = w;
 }
 
-void Cell::setCoords(int i, int j, int width, int height) {
-
-	this->i = i;
-	this->j = j;
-	this->width = width;
-	this->height = height;
-}
-
 void Cell::draw() {
-	//std::cout<<"i:  "<< i << "j:  "<< j <<std::endl;
 	if(block_type == ' '){
 		w->fillRectangle(i,j,width,height,Xwindow::Black);
 	}else if(block_type == 'I'){

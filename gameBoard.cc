@@ -379,6 +379,10 @@ void gameBoard::initGameBoardGraphics(){
 	}
 }
 
+XWindow* gameBoard::getWindow(){
+	return xw;
+}
+
 void gameBoard::textGraphics(){
 
 	xw->fillRectangle(300,100,200,200,Xwindow::White);

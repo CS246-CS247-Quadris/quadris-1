@@ -21,7 +21,6 @@ Xwindow * w;
   bool filled;
   void setCoords( int x, int y, int width, int height, Xwindow *w);
   friend std::ostream &operator<<(std::ostream &out, const Cell &c);
-  void setCoords(int i, int j, int width, int height);
    void draw();
   void undraw();
 };
