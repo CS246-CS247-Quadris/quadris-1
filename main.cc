@@ -73,7 +73,7 @@ int main(int argc, char * argv[]) {
 			if(cmdPossible == 0) { cerr << "no commands found" << endl; }
 			else if(cmdPossible > 1) { cerr << "too many possibilities" << endl; }
 			else {
-				cout << "your command: " << mult << "x " << command << endl;
+				//cout << "your command: " << mult << "x " << command << endl;
 				if(!command.compare("restart")) { (*board).restart(); }
 				else if(!command.compare("levelup")) { for(int i = 0; i < mult; ++i) (*board).levelUp(); }
 				else if(!command.compare("leveldown")) { for(int i = 0; i < mult; ++i) (*board).levelDown(); }
