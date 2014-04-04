@@ -31,11 +31,11 @@ bool Block::isLegalMove(int pX, int pY) {
 		int tmpX = cells.at(i)->x+pX;
 		int tmpY = cells.at(i)->y+pY;
 		if(!isLegalXY(tmpX,tmpY)) {
-			cout << "it is not legal" << endl;
+			//cout << "it is not legal" << endl;
 			return false;
 		}
 	}
-	cout << "it is legal" << endl;
+	//cout << "it is legal" << endl;
 	return true;
 }
 
@@ -83,7 +83,7 @@ void Block::drawNextBlock(std::string nblock, int j) {
 		
 	int width = 25;
 	int height = 25;
-	for(int i = 0; i < nblock.size();i++){
+	for(unsigned int i = 0; i < nblock.size();i++){
 
 	if(nblock[i] == ' '){
 		w->fillRectangle(300 + i*25,300 + j*25,width,height,Xwindow::White);

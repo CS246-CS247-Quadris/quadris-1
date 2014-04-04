@@ -234,7 +234,7 @@ void gameBoard::calculateScore() {
 					}
 					//add the bonus if no matching IDs were found
 					if(!id_used){
-						cout << "COMPLETE BLOCK DELETED ID" << getCell(i+numLinesCleared,j)->block_id <<"  Levelcreated: "<<getCell(i+numLinesCleared,j)->levelCreated <<endl;
+						//cout << "COMPLETE BLOCK DELETED ID" << getCell(i+numLinesCleared,j)->block_id <<"  Levelcreated: "<<getCell(i+numLinesCleared,j)->levelCreated <<endl;
 						used_ids.push_back(getCell(i+numLinesCleared,j)->block_id);
 						int block_bonus = getCell(i+numLinesCleared,j)->levelCreated + 1;
 						currentScore += block_bonus * block_bonus;
@@ -305,7 +305,7 @@ void gameBoard::preMove() {
 void gameBoard::postMove() {
 	vector<Cell *> cells = currentBlock->getCells();
 	for (vector<Cell *>::iterator it = cells.begin() ; it != cells.end(); ++it) {
-		cout << "X/Y: " << (*it)->x << " " << (*it)->y << endl;
+		//cout << "X/Y: " << (*it)->x << " " << (*it)->y << endl;
 		board[(*it)->x][(*it)->y] = *it;
 	}
 }
@@ -413,7 +413,7 @@ void gameBoard::textGraphics(){
 	xw->drawString(300, 100, ssLevel.str());
 	xw->drawString(300, 150, ssCurrentScore.str());
 	xw->drawString(300, 200, ssHiScore.str());
-	xw->drawString(300, 250, "Next: ");
+	xw->drawString(300, 280, "Next: ");
 }
 
 
