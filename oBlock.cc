@@ -9,9 +9,9 @@ oBlock::oBlock(gameBoard * pBoard, int pId):Block(pBoard) {
 oBlock::~oBlock() {}
 
 void oBlock::rotateCCW() {
-	std::cout << "it is legal" << std::endl;
+	//std::cout << "it is legal" << std::endl;
 }
 
 void oBlock::rotateCW() {
-	std::cout << "it is legal" << std::endl;
+	//std::cout << "it is legal" << std::endl;
 }
