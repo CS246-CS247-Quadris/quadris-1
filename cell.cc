@@ -24,3 +24,41 @@ std::ostream &operator<<(std::ostream &out, const Cell &c) {
 	out << c.block_type;
 	return out;
 }
+
+void Cell::setCoords(int i, int j, int width, int height, Xwindow *w) {
+
+	this->i = i;
+	this->j = j;
+	this->width = width;
+	this->height = height;
+	this->w = w;
+}
+
+void Cell::setCoords(int i, int j, int width, int height) {
+
+	this->i = i;
+	this->j = j;
+	this->width = width;
+	this->height = height;
+}
+
+
+void Cell::draw() {
+	//std::cout<<"i:  "<< i << "j:  "<< j <<std::endl;
+	if(block_type == ' '){
+		w->fillRectangle(i,j,width,height,Xwindow::Black);
+	}else if(block_type == 'I'){
+		w->fillRectangle(i,j,width,height,Xwindow::Red);
+	}else if(block_type == 'J'){
+		w->fillRectangle(i,j,width,height,Xwindow::Green);
+	}else if(block_type == 'O'){
+		w->fillRectangle(i,j,width,height,Xwindow::Blue);
+	}else{
+		w->fillRectangle(i,j,width,height,Xwindow::White);
+	}
+
+}
+
+void Cell::undraw() {
+	w->fillRectangle(i,j,width,height,Xwindow::White);
+}

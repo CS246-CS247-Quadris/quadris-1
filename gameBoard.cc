@@ -23,7 +23,7 @@ gameBoard::gameBoard() {
 	levelZeroCount = 1;
 	currentScore = 0;
 	hiScore = 0;
-	isGraphics = false;
+	isGraphics = true;
 	srand(time(NULL));
 	fileName = "sequence.txt";
 	
@@ -37,6 +37,11 @@ gameBoard::gameBoard() {
 		for(int j = 0; j < NUM_COLS; j++) {
 			board[i][j] = new Cell(i,j);
 		}
+	}
+	if(isGraphics){
+		xw = new Xwindow();
+		initGameBoardGraphics();
+		textGraphics();
 	}
 
 	//define blocks
@@ -76,6 +81,7 @@ void gameBoard::restart() {
 	nextBlock = generateBlock();
 
 	this->postMove();
+	initGameBoardGraphics();
 }
 
 Block * gameBoard::generateBlock() {
@@ -167,7 +173,7 @@ void gameBoard::setSeed(int pSeed) {
 }
 
 void gameBoard::setGraphics() {
-	isGraphics = true;
+	isGraphics = false;
 }
 
 bool gameBoard::getGraphics() {
@@ -243,6 +249,8 @@ void gameBoard::calculateScore() {
 		currentScore += added_score; 
 	}
 	if(currentScore > hiScore) hiScore = currentScore;
+
+	textGraphics();
 }
 
 void gameBoard::remove(int row) {
@@ -260,6 +268,7 @@ void gameBoard::remove(int row) {
 	for(int j = 0; j < NUM_COLS; ++j) {
 		board[3][j] = new Cell(3,j);
 	}
+	initGameBoardGraphics();
 }
 
 bool gameBoard::isGameOver() {
@@ -300,18 +309,21 @@ void gameBoard::left() {
 	this->preMove();
 	currentBlock->left();
 	this->postMove();
+	initGameBoardGraphics();
 }
 
 void gameBoard::right() {
 	this->preMove();
 	currentBlock->right();
 	this->postMove();
+	initGameBoardGraphics();
 }
 
 void gameBoard::down() {
 	this->preMove();
 	currentBlock->down();
 	this->postMove();
+	initGameBoardGraphics();
 }
 
 void gameBoard::drop() {
@@ -339,19 +351,47 @@ void gameBoard::drop() {
 		this->postMove();
 		nextBlock = generateBlock();
 	}
+	initGameBoardGraphics();
 }
 
 void gameBoard::rotateCW() {
 	this->preMove();
 	currentBlock->rotateCW();
 	this->postMove();
+	initGameBoardGraphics();
 }
 
 void gameBoard::rotateCCW() {
 	this->preMove();
 	currentBlock->rotateCCW();
 	this->postMove();
+initGameBoardGraphics();
 }
+void gameBoard::initGameBoardGraphics(){
+
+
+	for(int i = 0; i < NUM_ROWS; ++i) {
+		for(int j = 0; j < NUM_COLS; j++) {
+			board[i][j]->setCoords(j*25,i*25,25,25,xw);
+			board[i][j]->draw();
+		}
+	}
+}
+
+void gameBoard::textGraphics(){
+
+std::string msg1 = "Level:    " + level;
+
+std::string msg2 = "Score:    " + currentScore;
+
+std::string msg3 = "Hi Score:    " + hiScore;
+
+xw->drawString(300, 100, msg1);
+xw->drawString(300, 150, msg2);
+xw->drawString(300, 200, msg3);
+
+}
+
 
 ostream &operator<<(ostream &out, const gameBoard &b) {
 	//display header

@@ -16,7 +16,7 @@ int main(int argc, char * argv[]) {
 		if(strcmp(argv[i],"-text") == 0) {
 			//currently we default text, for now
 			//if we get graphics going, change setGraphics to set it to false, and uncomment this
-			//board->setGraphics();
+			board->setGraphics();
 		}
 		else if(strcmp(argv[i],"-seed") == 0) {
 			int s;

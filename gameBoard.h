@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include "window.h"
 #define NUM_ROWS 18
 #define NUM_COLS 10
 
@@ -19,7 +20,7 @@ class gameBoard {
 	int blockCounter;	//counter for block IDs
 	int currentScore;
 	int hiScore;
-	//Xwindow * xw;
+	Xwindow * xw;
 	bool isGraphics;
 	std::string fileName;
 	std::vector<int> used_ids;
@@ -31,6 +32,8 @@ class gameBoard {
 	void remove(int row);
 	bool isGameOver();
 	bool isLegal();
+	void initGameBoardGraphics();
+	void textGraphics();
 	public:
 		gameBoard();
 		~gameBoard();
